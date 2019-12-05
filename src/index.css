@@ -1,0 +1,182 @@
+
+
+body {
+  margin: 0;
+	font-family: 'Barlow';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	
+}
+
+@font-face {
+	font-family: 'Barlow';
+	src: local('Barlow'), url(./font/Barlow-Regular.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: 'Kosugi Maru';
+	src: local('Kosugi Maru'), url(./font/KosugiMaru-Regular.ttf) format('truetype');
+}
+
+.endingImage2 {
+	position: relative;
+}
+
+.titleText {
+	display: inline-block;
+	text-align: center;
+	margin-right: 30px;
+	vertical-align: middle;
+}
+
+.titleText h1 {
+	font-family: 'Kosugi Maru';
+	margin-top: 30px;
+}
+
+.titleText h2 {
+	font-family: 'Barlow';
+	font-weight:bold;
+	font-size: 28px;
+	padding-bottom:10px;
+}
+
+.titleText h5 {
+	font-family: 'Barlow', sans-serif;
+	font-weight:bold;
+	font-size: 15px;
+	color: #969696;
+	margin-bottom:15px;
+}
+
+.titleImage {
+	display: inline-block;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+.titleImage2 {
+	width:768px;
+	height: 216px;
+	margin-bottom:20px;
+}
+
+.movieImage {
+	width: 250px;
+	height: 350px;
+	display: block;
+	margin: 0 auto;
+	padding-top: 5px;
+}
+
+.movieGrid {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.starImage {
+	width: 40px;
+	height: 40px;
+	display: center;
+	margin: 0;
+	margin-top: 15px;
+}
+
+.movieText {
+	width: 300px;
+	display: block;
+	color: black;
+}
+
+#movieTitle {
+	font-weight: bold;
+	font-size: 24px;
+}
+
+#movieDirector {
+	font-size: 16px;
+	font-weight:bold;
+	color: #969696;
+}
+
+#movieGenre {
+	text-transform:uppercase;
+	color: #797979;
+	font-weight:bold;
+	background-color: #eeeeee;
+	width:90px;
+	margin: 0 auto; 
+	padding: 5px;
+	margin-bottom: 10px;
+	border-radius:5px;
+	font-size: 14px;
+}
+
+.movieList {
+	display: inline-block;
+	width: 300px;
+	margin: 10px 10px;
+	background-color: white;
+	padding-top: 20px;
+}
+
+.dropdownMenu1 {
+	display: inline;
+	margin: 5px;
+}
+
+.dropdownMenu2 {
+	display: inline;
+	margin: 5px;
+}
+
+.dropdownMenu2:after {
+	content: '\A';
+	white-space: pre;
+}
+
+button {
+	display: inline;
+	margin: 5px;
+	background-color: #3C61FD;
+	border: none;
+	margin-top: 1px;
+	padding: 8px;
+	border-radius: 5px;
+	color: white;
+}
+
+#favorites {
+	background-color: #2ECD62;
+}
+
+#reset {
+	background-color: #DE3636;
+}
+
+#TotoroLabel {
+	font-size: 14px;
+	text-transform: uppercase;
+	color: #969696;
+	font-weight:bold;
+}
+
+#TotoroButton {
+	margin-bottom: 50px;
+	margin-top: 5px;
+}
+
+.endingImage2 {
+	width: 300px;
+	margin-top:30px
+}
+
+button:after {
+	content: '\A';
+	white-space: pre;
+}
+
+
