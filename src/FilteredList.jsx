@@ -145,13 +145,22 @@ class FilteredList extends Component {
 						Oldest First
 					</Dropdown.Item>
 				</DropdownButton>
+				
+				
+				
 				<div className="movieGrid">
 				{movies.map((movie, index) => {
 					return <div className="movieList" key={movie.name}>
-						<h3 id="movieTitle" className="movieText">{movie.name}</h3>
-						<h5 id="movieDirector" className="movieText">{movie.director} - {movie.year}</h5>
-						<h6 id="movieGenre" className="movieText">{movie.genre}</h6>
-						<img className="movieImage" src={ require(`${ movie.pic }`)} />
+						<div class="container">
+							<img src={ require(`${ movie.pic }`)} class="movieImage"/>
+							<div class="middle">
+								<div class="text">
+									<h3 id="movieTitle" className="movieText">{movie.name}</h3>
+									<h5 id="movieDirector" className="movieText">{movie.director} - {movie.year}</h5>
+									<h6 id="movieGenre" className="movieText">{movie.genre}</h6>
+								</div>
+							</div>
+						</div>
 						<img className="starImage" src={require(`${ movie.favorite }`)} onClick={() => this.favorited(movie)} />
 					</div>
 				})}
