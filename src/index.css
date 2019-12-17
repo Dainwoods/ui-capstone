@@ -32,6 +32,10 @@ code {
 	vertical-align: middle;
 }
 
+.titleText:hover {
+	color: gray;
+}
+
 .titleText h1 {
 	font-family: 'Kosugi Maru';
 	margin-top: 30px;

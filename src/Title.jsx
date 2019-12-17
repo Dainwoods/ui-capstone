@@ -23,7 +23,7 @@ class Title extends Component {
 	render() {
 		let img = this.props.pics[0];
 		return (
-		  <div className="title">
+		  <div className="title" onClick={() => this.props.changePageNumber(0)}>
 			<div className="titleText">
 				<h1>日本のえいが</h1>
 				<h2>JAPANESE MOVIES</h2>

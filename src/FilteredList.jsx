@@ -13,21 +13,8 @@ class FilteredList extends Component {
 			genre: "All Genres",
 			director: "All Directors",
 			sort: "Newest First",
-			favorites: false,
-			movieList: [
-				{ name: "Your Name", genre: "Drama", director: "Makoto Shinkai", year: 2016, pic: './images/your-name.jpg', favorite: './images/stargrey.png' },
-				{ name: "A Silent Voice", genre: "Romance", director: "Naoko Yamada", year: 2016, pic: './images/silent-voice.jpg', favorite: './images/stargrey.png' },
-				{ name: "Spirited Away", genre: "Fantasy", director: "Hayao Miyazaki", year: 2001, pic: './images/spirited-away.jpg', favorite: './images/stargrey.png' },
-				{ name: "Princess Mononoke", genre: "Fantasy", director: "Hayao Miyazaki", year: 1997, pic: './images/princess-mononoke.jpg', favorite: './images/stargrey.png' },
-				{ name: "My Neighboor Totoro", genre: "Fantasy", director: "Hayao Miyazaki", year: 1988, pic: './images/totoro.jpg', favorite: './images/stargrey.png' },
-				{ name: "Kiki's Delivery Service", genre: "Drama", director: "Hayao Miyazaki", year: 1989, pic: './images/kiki.jpg', favorite: './images/stargrey.png' },
-				{ name: "Grave of the Fireflies", genre: "War", director: "Isao Takahata", year: 1988, pic: './images/fireflies.jpg', favorite: './images/stargrey.png' },
-				{ name: "Ponyo", genre: "Drama", director: "Hayao Miyazaki", year: 2008, pic: './images/ponyo.jpg', favorite: './images/stargrey.png' },
-				{ name: "Howl's Moving Castle", genre: "Fantasy", director: "Hayao Miyazaki", year: 2004, pic: './images/howl.jpg', favorite: './images/stargrey.png' },
-				{ name: "Porco Rosso", genre: "Fantasy", director: "Hayao Miyazaki", year: 1992, pic: './images/porco.jpg', favorite: './images/stargrey.png' },
-				{ name: "Castle in the Sky", genre: "Action", director: "Hayao Miyazaki", year: 1986, pic: './images/castle.jpg', favorite: './images/stargrey.png' },
-				{ name: "The Cat Returns", genre: "Drama", director: "Hiroyuki Morita", year: 2002, pic: './images/cat.jpg', favorite: './images/stargrey.png' }
-			]
+			favorites: false
+			
 		};
 
 	}
@@ -75,22 +62,27 @@ class FilteredList extends Component {
 		}		
 		this.setState({genre: this.state.genre});
 	}
+	
+	sendData = (pageNumber) => {
+		this.props.parentCallback(pageNumber);
+	}
   
 
 	render() {
 	  
 		let movies;
 		if(this.state.sort === "Newest First") {
-			movies = this.state.movieList.filter(this.filterAndSearch).sort((a, b) => (a.year < b.year) ? 1 : -1);
+			movies = this.props.movieList.filter(this.filterAndSearch).sort((a, b) => (a.year < b.year) ? 1 : -1);
 		}
 		else {
-			movies = this.state.movieList.filter(this.filterAndSearch).sort((a, b) => (a.year > b.year) ? 1 : -1);
+			movies = this.props.movieList.filter(this.filterAndSearch).sort((a, b) => (a.year > b.year) ? 1 : -1);
 		}
 	  
 		let img = './images/endingImages/totoroWalk.gif'
 	
 	  
 		return (
+			
 			<div className="filter-list">
 				<button id="reset" onClick={this.resetFilters}>Reset</button>
 				<button id="favorites" onClick={this.toggleFavorites}>Toggle Favorites</button>
@@ -100,19 +92,25 @@ class FilteredList extends Component {
 						All Genres
 					</Dropdown.Item>
 					<Dropdown.Item eventKey="drama" onClick={this.onSelectFilterTypeGenre}>
-						Drama
+						Action
+					</Dropdown.Item>
+					<Dropdown.Item eventKey="drama" onClick={this.onSelectFilterTypeGenre}>
+						Adventure
+					</Dropdown.Item>
+					<Dropdown.Item eventKey="drama" onClick={this.onSelectFilterTypeGenre}>
+						Comedy
 					</Dropdown.Item>
 					<Dropdown.Item eventKey="romance" onClick={this.onSelectFilterTypeGenre}>
-						Romance
+						Drama
 					</Dropdown.Item>
 					<Dropdown.Item eventKey="fantasy" onClick={this.onSelectFilterTypeGenre}>
 						Fantasy
 					</Dropdown.Item>
 					<Dropdown.Item eventKey="war" onClick={this.onSelectFilterTypeGenre}>
-						War
+						Romance
 					</Dropdown.Item>
 					<Dropdown.Item eventKey="action" onClick={this.onSelectFilterTypeGenre}>
-						Action
+						War
 					</Dropdown.Item>
 				</DropdownButton>
 				
@@ -120,21 +118,27 @@ class FilteredList extends Component {
 					<Dropdown.Item eventKey="all" onClick={this.onSelectFilterTypeDirector}>
 						All Directors
 					</Dropdown.Item>
-					<Dropdown.Item eventKey="shinkai" onClick={this.onSelectFilterTypeDirector}>
-						Makoto Shinkai
+					<Dropdown.Item eventKey="morita" onClick={this.onSelectFilterTypeDirector}>
+						Goro Miyazaki
 					</Dropdown.Item>
-					<Dropdown.Item eventKey="yamada" onClick={this.onSelectFilterTypeDirector}>
-						Naoko Yamada
-					</Dropdown.Item>
-					<Dropdown.Item eventKey="miyazaki" onClick={this.onSelectFilterTypeDirector}>
+					<Dropdown.Item eventKey="morita" onClick={this.onSelectFilterTypeDirector}>
 						Hayao Miyazaki
+					</Dropdown.Item>
+					<Dropdown.Item eventKey="morita" onClick={this.onSelectFilterTypeDirector}>
+						Hiromasa Yonebayashi
+					</Dropdown.Item>
+					<Dropdown.Item eventKey="morita" onClick={this.onSelectFilterTypeDirector}>
+						Hiroyuki Morita
 					</Dropdown.Item>
 					<Dropdown.Item eventKey="takahata" onClick={this.onSelectFilterTypeDirector}>
 						Isao Takahata
 					</Dropdown.Item>
 					<Dropdown.Item eventKey="morita" onClick={this.onSelectFilterTypeDirector}>
-						Hiroyuki Morita
+						Tomomi Mochizuki
 					</Dropdown.Item>
+					<Dropdown.Item eventKey="morita" onClick={this.onSelectFilterTypeDirector}>
+						Yoshifumi Kondo
+					</Dropdown.Item>	
 				</DropdownButton>
 				
 				<DropdownButton title={this.state.sort} id="dropdown-basic-button" className="dropdownMenu2">
@@ -151,7 +155,7 @@ class FilteredList extends Component {
 				<div className="movieGrid">
 				{movies.map((movie, index) => {
 					return <div className="movieList" key={movie.name}>
-						<div class="container">
+						<div class="container" onClick={() => this.sendData(movie.index)}>
 							<img src={ require(`${ movie.pic }`)} class="movieImage"/>
 							<div class="middle">
 								<div class="text">
