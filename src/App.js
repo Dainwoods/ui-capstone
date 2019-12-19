@@ -7,6 +7,10 @@ import MoviePage from "./MoviePage";
 import './font/Barlow-Regular.ttf'
 import './font/Barlow-Bold.ttf'
 import './font/KosugiMaru-Regular.ttf'
+import AboutPage from "./about"
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Navigation from "./Navigation"
+import { Link } from 'react-router-dom';
 
 class App extends Component {
 	
@@ -80,6 +84,10 @@ class App extends Component {
 		this.changePageNumber(2);
 		this.setState({currentMovie: movieIndex});
 	};
+
+	loadAboutPage = () => {
+		this.changePageNumber(1);
+	}
 	
 	changePageNumber = (pageNumber) => {
 		this.setState({page: pageNumber});
@@ -89,6 +97,7 @@ class App extends Component {
 		let mainPage = 
 			<div className="App">
 				<Title pics={this.state.pics} changePageNumber={this.changePageNumber}/>
+				<button onClick={this.loadAboutPage}>About</button>
 				
 				<FilteredList parentCallback={this.loadMoviePage} movieList={this.state.movieList}/>
 				
@@ -98,6 +107,7 @@ class App extends Component {
 		let aboutPage = 
 			<div className="App">
 				<Title pics={this.state.pics} changePageNumber={this.changePageNumber}/>
+				<AboutPage about/>
 			</div>;
 			
 		let moviePage = 
@@ -125,7 +135,8 @@ class App extends Component {
 		  
 		  
 		return (
-		  curPage
+		curPage
+		
 		);
   }
 }

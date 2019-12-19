@@ -1,0 +1,13 @@
+.content-container {
+	display:flex;
+	direction: row;
+}
+
+.paragraph-container {
+	display: flex;
+	direction: column;
+}
+
+.img {
+	min-width: 200px
+}
