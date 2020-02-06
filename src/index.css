@@ -68,7 +68,7 @@ code {
 	margin-bottom:20px;
 }
 
-.movieImage {
+/* .movieImage {
 	width: 450px;
 	height: 650px;
 	display: block;
@@ -78,7 +78,7 @@ code {
 	opacity: 1;
 	transition: .5s ease;
 	backface-visibility: hidden;
-}
+} */
 
 .middle {
   transition: .5s ease;
@@ -121,6 +121,15 @@ code {
 	display: block;
 	color: black;
 }
+.movTitle {
+	font-weight: bold;
+	font-size: 24px;
+	display: center;
+}
+
+#moviePageImg {
+
+}
 
 #movieTitle {
 	font-weight: bold;
@@ -151,6 +160,11 @@ code {
 	margin: 10px 10px;
 	background-color: white;
 	padding-top: 20px;
+}
+
+.movieIntro {
+	/* margin-left: 8vw; */
+	font-weight: bold;
 }
 
 .dropdownMenu1 {
@@ -210,17 +224,24 @@ button:after {
 }
 
 .movie-description {
-	margin-right: 70px;
-	margin-top: 130px;
-	text-align: center;
+	/* margin-right: 70px; */
+	/* margin-top: 58px; */
+	text-align: left;
 	font-size: 24px;
 }
 
 .moviePage {
+	display: inline;
+	/* grid-gap: 0;
+	/* grid-template-columns: 10vw 10vw; */
+	/* margin-left: 10vw;  */ 
+}
+.movieDetails {
 	display: grid;
-	grid-gap: 0;
-	grid-template-columns: 40vw 40vw;
-	margin-left: 14vw; 
+	grid-template-columns: 28vw 30vw;
+	grid-gap:0;
+	margin-left: 17vw;
+	margin-top: 25px;
 }
 .movieImage {
 	width: 250px;

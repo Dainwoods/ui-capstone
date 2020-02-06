@@ -1,13 +1,19 @@
 .content-container {
-	display:flex;
-	direction: row;
+	display:grid;
+	grid-gap: 7vw;
+	grid-template-columns: 30vw 40vw;
+	grid-template-rows: .3vh;
 }
 
 .paragraph-container {
-	display: flex;
-	direction: column;
+	display: grid;
+	align-items: left;
+	text-align: left;
+	
+	/* direction: column; */
 }
 
 .img {
-	min-width: 200px
+	min-width: 90px;
+	height: 490px;
 }
