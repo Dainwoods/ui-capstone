@@ -13,10 +13,10 @@ import Navigation from "./Navigation"
 import { Link } from 'react-router-dom';
 
 class App extends Component {
-	
+
 	constructor(props) {
 		super(props);
-		
+
 		this.state = {
 		  pics: [
 			{img: './images/titleImages/porco2.jpg'},
@@ -79,7 +79,7 @@ class App extends Component {
 			]
 		};
 	}
-	
+
 	loadMoviePage = (movieIndex) => {
 		this.changePageNumber(2);
 		this.setState({currentMovie: movieIndex});
@@ -88,35 +88,35 @@ class App extends Component {
 	loadAboutPage = () => {
 		this.changePageNumber(1);
 	}
-	
+
 	changePageNumber = (pageNumber) => {
 		this.setState({page: pageNumber});
 	};
-	
+
 	render() {
-		let mainPage = 
+		let mainPage =
 			<div className="App">
 				<Title pics={this.state.pics} changePageNumber={this.changePageNumber}/>
 				<button onClick={this.loadAboutPage}>About</button>
-				
+
 				<FilteredList parentCallback={this.loadMoviePage} movieList={this.state.movieList}/>
-				
+
 				<Ending totoro={this.state.totoro} speedUp={this.state.speedUp}/>
 			</div>;
-		  
-		let aboutPage = 
+
+		let aboutPage =
 			<div className="App">
 				<Title pics={this.state.pics} changePageNumber={this.changePageNumber}/>
 				<AboutPage about/>
 			</div>;
-			
-		let moviePage = 
+
+		let moviePage =
 			<div className="App">
 				<Title pics={this.state.pics} changePageNumber={this.changePageNumber}/>
-				
+
 				<MoviePage movie={this.state.movieList[this.state.currentMovie]}/>
 			</div>;
-		  
+
 		let curPage;
 		switch(this.state.page) {
 			case 0:
@@ -131,12 +131,12 @@ class App extends Component {
 			default:
 				curPage = mainPage;
 				break;
-		}	
-		  
-		  
+		}
+
+
 		return (
 		curPage
-		
+
 		);
   }
 }
