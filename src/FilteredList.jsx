@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import List from "./List";
+import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
 
 class FilteredList extends Component {
 	constructor(props) {
@@ -152,6 +153,7 @@ class FilteredList extends Component {
 
 
 
+
 				<div className="movieGrid">
 				{movies.map((movie, index) => {
 					return <div className="movieList" key={movie.name}>
@@ -169,6 +171,13 @@ class FilteredList extends Component {
 					</div>
 				})}
 				</div>
+
+				<TwitterTimelineEmbed
+				  sourceType="profile"
+				  screenName="ItsGhibli"
+				  options={{tweetLimit: 2, width: 700}}
+				/>
+
 			</div>
 		);
 	}
