@@ -9,7 +9,8 @@ class Title extends Component {
 			index: 1,
 			brightness: 100
 		};
-		setInterval(this.tick, 5 * 1000);
+		this.tickID = setInterval(this.tick, 5 * 1000);
+		this.firstLoop = true;
 	}
 
 	changeIndex = () => {
@@ -19,7 +20,8 @@ class Title extends Component {
 			ind = 0;
 		}
 		this.setState({index: ind});
-		clearInterval(this.intervalID);
+		this.fadeInID = setInterval(this.fadeIn, .25 * 1000);
+		this.firstLoop = true;
 	}
 
 	fadeOut = () => {
@@ -27,19 +29,27 @@ class Title extends Component {
 		if(this.state.brightness === 0) {
 			clearInterval(this.fadeOutID);
 			this.changeIndex();
-			this.fadeInID = setInterval(this.fadeIn, .01 * 1000);
+
 		}
 	}
 
 	fadeIn = () => {
 		this.setState({brightness: this.state.brightness + 1})
+		if(this.firstLoop) {
+			this.firstLoop = false;
+			clearInterval(this.fadeInID);
+			this.fadeInID = setInterval(this.fadeIn, .01 * 1000);
+		}
 		if(this.state.brightness == 100) {
 			clearInterval(this.fadeInID);
+			this.tickID = setInterval(this.tick, 5 * 1000);
 		}
 	}
 
 	tick = () => {
+		clearInterval(this.tickID);
 		this.fadeOutID = setInterval(this.fadeOut, .01 * 1000);
+
 	}
 
 	render() {
@@ -58,7 +68,7 @@ class Title extends Component {
 		);*/
 
 		return (
-			<div className="title" onClick={() => this.props.changePageNumber(0)}>
+			<div className="title">
 				<img className="carouselImage" src={ require(`${ this.props.pics[this.state.index].img }`)} style={{filter: "brightness(" + this.state.brightness + "%)"}} />
 			</div>
 		);
