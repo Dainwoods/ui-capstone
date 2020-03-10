@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import List from "./List";
 import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
+import InstagramEmbed from 'react-instagram-embed';
 
 class FilteredList extends Component {
 	constructor(props) {
@@ -170,13 +171,33 @@ class FilteredList extends Component {
 						<img className="starImage" src={require(`${ movie.favorite }`)} onClick={() => this.favorited(movie)} />
 					</div>
 				})}
+
+			</div>
+
+			<div class="socialMedia">
+
+				<div>
+					<TwitterTimelineEmbed/>
+					<a class="twitter-timeline" data-width="600" data-height="500" data-theme="light" href="https://twitter.com/ItsGhibli"></a>
+					<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+				</div>	
+
+				<div>
+				<InstagramEmbed
+				  url='https://instagr.am/p/B9W7AQOlXmh/'
+				  maxWidth={400}
+				  hideCaption={true}
+				  containerTagName='div'
+				  protocol=''
+				  injectScript
+				  onLoading={() => {}}
+				  onSuccess={() => {}}
+				  onAfterRender={() => {}}
+				  onFailure={() => {}}
+				/>
 				</div>
 
-				<TwitterTimelineEmbed
-				  sourceType="profile"
-				  screenName="ItsGhibli"
-				  options={{tweetLimit: 2, width: 700}}
-				/>
+			</div>			
 
 			</div>
 		);

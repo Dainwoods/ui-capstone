@@ -272,3 +272,10 @@ button:after {
 	transition: .5s ease;
 	backface-visibility: hidden;
 }
+
+.socialMedia {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+
+}
