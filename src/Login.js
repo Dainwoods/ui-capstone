@@ -7,6 +7,8 @@ class LoginPage extends Component {
 	constructor(props) {
 		super(props);
 
+		// sign IN is considered OLD, since you already have an account
+		// sign UP is considered NEW, since you must create an account
 		this.state = {
 			usernameOLD: "",
 			passwordOLD: "",
