@@ -23,6 +23,9 @@ class AboutPage extends Component {
 					</div>
 			</div>
 
+
+			
+
     );
   }
 }
