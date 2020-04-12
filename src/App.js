@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import "./App.css";
 import FilteredList from "./FilteredList";
 import Title from "./Title";
+import Carousel from "./Carousel"
 import Ending from "./Ending";
+import Divider from "./Divider";
 import MoviePage from "./MoviePage";
 import './font/Barlow-Regular.ttf'
 import './font/Barlow-Bold.ttf'
@@ -93,11 +95,16 @@ class App extends Component {
 		this.setState({page: pageNumber});
 	};
 
-	render() {
+	loadLoginPage = () => {
+		//to be filled out
+	}
+
+	render() {		
 		let mainPage =
 			<div className="App">
-				<Title pics={this.state.pics} changePageNumber={this.changePageNumber}/>
-				<button onClick={this.loadAboutPage}>About</button>
+				<Title changePageNumber={this.changePageNumber} loadAboutPage={this.loadAboutPage} loadLoginPage={this.loadLoginPage}/>
+				<Carousel pics={this.state.pics} changePageNumber={this.changePageNumber}/>
+
 
 				<FilteredList parentCallback={this.loadMoviePage} movieList={this.state.movieList}/>
 
@@ -106,14 +113,15 @@ class App extends Component {
 
 		let aboutPage =
 			<div className="App">
-				<Title pics={this.state.pics} changePageNumber={this.changePageNumber}/>
+				<Title changePageNumber={this.changePageNumber} loadAboutPage={this.loadAboutPage} loadLoginPage={this.loadLoginPage}/>
+				<Divider/>
 				<AboutPage about/>
 			</div>;
 
 		let moviePage =
 			<div className="App">
-				<Title pics={this.state.pics} changePageNumber={this.changePageNumber}/>
-
+				<Title changePageNumber={this.changePageNumber} loadAboutPage={this.loadAboutPage} loadLoginPage={this.loadLoginPage}/>
+				<Divider/>
 				<MoviePage movie={this.state.movieList[this.state.currentMovie]}/>
 			</div>;
 
