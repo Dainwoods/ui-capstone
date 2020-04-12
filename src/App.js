@@ -147,6 +147,7 @@ class App extends Component {
 				break;
 			case 3:
 				curPage = loginPage;
+				break;
 			default:
 				curPage = mainPage;
 				break;
