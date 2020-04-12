@@ -13,6 +13,7 @@ import AboutPage from "./about"
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navigation from "./Navigation"
 import { Link } from 'react-router-dom';
+import LoginPage from "./Login"
 
 class App extends Component {
 
@@ -89,15 +90,16 @@ class App extends Component {
 
 	loadAboutPage = () => {
 		this.changePageNumber(1);
-	}
+	};
+
+	loadLoginPage = () => {
+		this.changePageNumber(3);
+	};
 
 	changePageNumber = (pageNumber) => {
 		this.setState({page: pageNumber});
 	};
 
-	loadLoginPage = () => {
-		//to be filled out
-	}
 
 	render() {		
 		let mainPage =
@@ -125,6 +127,13 @@ class App extends Component {
 				<MoviePage movie={this.state.movieList[this.state.currentMovie]}/>
 			</div>;
 
+		let loginPage =
+			<div className="App">
+				<Title changePageNumber={this.changePageNumber} loadAboutPage={this.loadAboutPage} loadLoginPage={this.loadLoginPage}/>
+				<Divider/>
+				<LoginPage login/>
+			</div>;
+
 		let curPage;
 		switch(this.state.page) {
 			case 0:
@@ -136,6 +145,8 @@ class App extends Component {
 			case 2:
 				curPage = moviePage;
 				break;
+			case 3:
+				curPage = loginPage;
 			default:
 				curPage = mainPage;
 				break;
