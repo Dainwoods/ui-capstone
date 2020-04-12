@@ -101,7 +101,7 @@ class App extends Component {
 	};
 
 
-	render() {		
+	render() {
 		let mainPage =
 			<div className="App">
 				<Title changePageNumber={this.changePageNumber} loadAboutPage={this.loadAboutPage} loadLoginPage={this.loadLoginPage}/>
