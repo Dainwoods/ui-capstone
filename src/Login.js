@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import './Login.css'
+import './Login.css';
+import axios from 'axios';
 import { Form, Button } from 'react-bootstrap'
-
+import https from 'https';
+import Title from "./Title";
+import Divider from "./Divider";
 class LoginPage extends Component {
 
 	constructor(props) {
@@ -42,11 +45,35 @@ class LoginPage extends Component {
 	checkCompletionNEW = () => {
 		return this.state.usernameNEW.length > 0 && this.state.passwordNEW.length > 0;
 	};
+	submitHandler = e => {
+		e.preventDefault();
+		// axios.post('https://localhost:3000/login', this.state).
+		// then(response => {console.log("successful post: ", response)})
+		// .catch(err => {console.log("error: ", err)});
+		const response = fetch('api/', {
+			method: 'POST',
+			body: JSON.stringify(this.state)
+		})
+		// const instance = axios.create({
+		// 	httpsAgent: new https.Agent({  
+		// 	  rejectUnauthorized: false
+		// 	})
+		//   });
+		// instance.post('https://localhost:3000/login', this.state).
+		// then(response => {console.log("successful post: ", response)})
+		// .catch(err => {console.log("error: ", err)});
+		  
+		// let xhr = new XMLHttpRequest();
+		// xhr.open('POST', 'https://localhost:3000/login');
+		// xhr.send(JSON.stringify({ example: 'data' }))
+		
+	}
 
 	render() {
 		return (
-			<div>
-
+			<div className="App">
+				<Title/>
+				<Divider/>
 				<div class="form-container">
 					<div>
 						<Form>
@@ -70,7 +97,7 @@ class LoginPage extends Component {
 							<Form.Group controlId="signUpPW">
 								<Form.Control type="text" placeholder="Password" onChange={this.setPasswordNEW}/>
 							</Form.Group>
-							<Button variant="primary" type="submit" disabled={!this.checkCompletionNEW()}>Submit</Button>
+							<Button variant="primary" type="submit" disabled={!this.checkCompletionNEW()} onClick={this.submitHandler}>Submit</Button>
 						</Form>
 					</div>
 				</div>

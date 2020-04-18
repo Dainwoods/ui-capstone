@@ -13,7 +13,6 @@ import AboutPage from "./about"
 import { BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Navigation from "./Navigation"
 import LoginPage from "./Login"
-import MainPage from "./MainPage"
 
 class App extends Component {
 
@@ -102,20 +101,60 @@ class App extends Component {
 
 
 	render() {
-		
+		let mainPage =
+			<div className="App">
+				<Title changePageNumber={this.changePageNumber} loadAboutPage={this.loadAboutPage} loadLoginPage={this.loadLoginPage}/>
+				<Carousel pics={this.state.pics} changePageNumber={this.changePageNumber}/>
+
+
+				<FilteredList parentCallback={this.loadMoviePage} movieList={this.state.movieList}/>
+
+				<Ending totoro={this.state.totoro} speedUp={this.state.speedUp}/>
+			</div>;
+
+		let aboutPage =
+			<div className="App">
+				<Title changePageNumber={this.changePageNumber} loadAboutPage={this.loadAboutPage} loadLoginPage={this.loadLoginPage}/>
+				<Divider/>
+				<AboutPage about/>
+			</div>;
+
+		let moviePage =
+			<div className="App">
+				<Title changePageNumber={this.changePageNumber} loadAboutPage={this.loadAboutPage} loadLoginPage={this.loadLoginPage}/>
+				<Divider/>
+				<MoviePage movie={this.state.movieList[this.state.currentMovie]}/>
+			</div>;
+
+		let loginPage =
+			<div className="App">
+				<Title changePageNumber={this.changePageNumber} loadAboutPage={this.loadAboutPage} loadLoginPage={this.loadLoginPage}/>
+				<Divider/>
+				<LoginPage login/>
+			</div>;
+
+		let curPage;
+		switch(this.state.page) {
+			case 0:
+				curPage = mainPage;
+				break;
+			case 1:
+				curPage = aboutPage;
+				break;
+			case 2:
+				curPage = moviePage;
+				break;
+			case 3:
+				curPage = loginPage;
+				break;
+			default:
+				curPage = mainPage;
+				break;
+		}
+
 
 		return (
-			<Router>
-				<Switch>
-					<Route exact path= '/about' render= { () => <AboutPage about/>}/>
-					<Route exact path='/home' render= { () => <MainPage pics={this.state.pics} 
-					movieList={this.state.movieList} totoro={this.state.totoro} speedUp={this.state.speedUp } loadMoviePage={this.loadMoviePage}/>}/>
-						
-					
-					<Route exact path='/moviePage' render= { () => <MoviePage movie={this.state.movieList[this.state.currentMovie]}/>}/>
-					<Route exact path='/login' render={ () => <LoginPage login/>}></Route>
-				</Switch>
-			</Router>
+		curPage
 
 		);
   }

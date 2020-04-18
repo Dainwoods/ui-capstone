@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import aboutImg from './images/aboutImg.jpg'
 import './About.css'
-
+import Title from "./Title";
+import Divider from "./Divider";
 class AboutPage extends Component {
 	render() {
 		return (
-			<div>
+			<div className="App">
+				<Title changePageNumber={this.changePageNumber} loadAboutPage={this.loadAboutPage} loadLoginPage={this.loadLoginPage}/>
+				<Divider/>
 				<h1>About Studio Ghibli</h1>
 				<div class="content-container">
 					<img src={aboutImg} alt="Image" class="img"/>
