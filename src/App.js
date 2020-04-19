@@ -10,7 +10,7 @@ import './font/Barlow-Regular.ttf'
 import './font/Barlow-Bold.ttf'
 import './font/KosugiMaru-Regular.ttf'
 import AboutPage from "./about"
-import { BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom';
 import Navigation from "./Navigation"
 import LoginPage from "./Login"
 import MainPage from "./MainPage"

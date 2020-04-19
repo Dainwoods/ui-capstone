@@ -9,7 +9,7 @@ class MainPage extends Component {
     render () {
         return (
         <div className="App">
-            {/*<Title/>*/}
+
             <Carousel pics={this.props.pics} />
 
             <FilteredList parentCallback={this.props.loadMoviePage} movieList={this.props.movieList}/>

@@ -40,9 +40,7 @@ body, html {
 }
 
 .titleBar {
-/*  width: 100%;
-  margin: 0px;
-  padding: 0px;*/
+
 }
 
 .titleBar h1 {
@@ -80,6 +78,11 @@ body, html {
 	font-size: 20px;
 }
 
+.title-container-mainpage {
+	position: relative;
+	text-align: center;
+}
+
 .title-container {
 	position: relative;
 	text-align: center;
@@ -90,6 +93,7 @@ body, html {
   	top: 50%;
   	left: 50%;
   	transform: translate(-50%, -50%);
+  	color: white;
 }
 
 .title-centered h1 {
@@ -104,6 +108,7 @@ body, html {
   	display: flex;
   	align-items: baseline;
   	padding: 10px;
+
 }
 
 .menu-container h1 {
@@ -131,6 +136,14 @@ body, html {
 	width:768px;
 	height: 216px;
 	margin-bottom:20px;
+}
+
+/*.carousel-about-link {
+	color: white;
+}*/
+
+.carousel-nav-link {
+	color: white;
 }
 
 /* .movieImage {

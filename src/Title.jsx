@@ -5,7 +5,7 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Link
+	NavLink
   } from "react-router-dom";
 import Login from "./Login.js"
 
@@ -18,12 +18,33 @@ class Title extends Component {
 		return (
 		  <div className="title-container">
 				<div className="titleBarText"> 
-					<h1><Link to={"/home"}>Studio Ghibli</Link></h1>
+					<h1><NavLink to={"/home"}
+						activeStyle={{
+    					fontWeight: "bold",
+    					color: "black",
+    					textDecoration: "none"
+  					}}>Studio Ghibli</NavLink></h1>
+
 				</div>
 
 				<div className="menu-container"> 
-					<h1><Link to={"/about"}>About</Link></h1>
-					<h1><Link className="nav-link" to={"/login"}>Login</Link></h1>
+
+					<h1><NavLink to={"/about"}
+						activeStyle={{
+    					fontWeight: "bold",
+    					color: "black",
+    					textDecoration: "none"
+					}}>About</NavLink></h1>
+
+					<h1><NavLink to={"/login"}
+						activeStyle={{
+    					fontWeight: "bold",
+    					color: "black",
+    					textDecoration: "none"
+					}}>Login</NavLink></h1>
+
+					{/*<h1><NavLink to={"/about"}>About</NavLink></h1>
+										<h1><NavLink className="nav-link" to={"/login"}>Login</NavLink></h1>*/}
 				</div>
 		  </div>
 		);

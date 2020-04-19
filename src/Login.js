@@ -73,9 +73,9 @@ class LoginPage extends Component {
 		return (
 			<div className="App">
 				<Title/>
-				<Divider/>
+
 				<div class="form-container">
-					<div>
+					<div class="eachForm">
 						<Form>
 							<Form.Label>Sign In</Form.Label>
 							<Form.Group controlId="signInID">
@@ -88,7 +88,7 @@ class LoginPage extends Component {
 			  			</Form>
 		  			</div>
 
-		  			<div>
+		  			<div class="eachForm">
 			  			<Form>
 			  				<Form.Label>Sign Up</Form.Label>
 			  				<Form.Group controlId="signUpID">

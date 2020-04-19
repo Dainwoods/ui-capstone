@@ -5,7 +5,7 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Link
+	NavLink
   } from "react-router-dom";
 
 class Carousel extends Component {
@@ -76,18 +76,38 @@ class Carousel extends Component {
 		return (
 
 
-			<div className="title-container">
+			<div className="title-container-mainpage">
 
 
 				<img className="carouselImage" src={ require(`${ this.props.pics[this.state.index].img }`)} style={{filter: "brightness(" + this.state.brightness + "%)"}} />
 
 				<div class="title-centered">
-					<h1><Link to={"/home"}>Studio Ghibli</Link></h1>
+
+					<h1><NavLink to={"/home"}
+						activeStyle={{
+    					fontWeight: "bold",
+    					color: "white",
+    					textDecoration: "none"
+  					}}>Studio Ghibli</NavLink></h1>
+
 				</div>
 
 				<div class="menu-container">
-					<h1><Link to={"/about"}>About</Link></h1>
-					<h1><Link className="nav-link" to={"/login"}>Login</Link></h1>
+
+					<h1><NavLink to={"/about"}
+						activeStyle={{
+    					fontWeight: "bold",
+    					color: "white",
+    					textDecoration: "none"
+					}}>About</NavLink></h1>
+
+					<h1><NavLink to={"/login"}
+						activeStyle={{
+    					fontWeight: "bold",
+    					color: "white",
+    					textDecoration: "none"
+					}}>Login</NavLink></h1>
+
 				</div>
 
 			</div>
