@@ -21,7 +21,7 @@
 }
 
 .paragraph-container {
-	padding-left: 30px;
+	margin: 30px;
 	display: flex;
 	flex-direction: column;
 	max-width: 870px;
