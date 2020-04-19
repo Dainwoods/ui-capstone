@@ -5,7 +5,7 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	NavLink
+	NavLink,
   } from "react-router-dom";
 
 class Carousel extends Component {
@@ -84,10 +84,13 @@ class Carousel extends Component {
 				<div class="title-centered">
 
 					<h1><NavLink to={"/home"}
+						style={{
+							textDecoration: "none",
+						}}
 						activeStyle={{
     					fontWeight: "bold",
     					color: "white",
-    					textDecoration: "none"
+    					textDecoration: "none",
   					}}>Studio Ghibli</NavLink></h1>
 
 				</div>
@@ -95,18 +98,25 @@ class Carousel extends Component {
 				<div class="menu-container">
 
 					<h1><NavLink to={"/about"}
+						style={{
+							textDecoration: "none",
+							":hover": { background: "green" }
+						}}
 						activeStyle={{
     					fontWeight: "bold",
     					color: "white",
     					textDecoration: "none"
-					}}>About</NavLink></h1>
+					}} class="carousel-about-link">About</NavLink></h1>
 
 					<h1><NavLink to={"/login"}
+						style={{
+							textDecoration: "none",
+						}}
 						activeStyle={{
     					fontWeight: "bold",
     					color: "white",
     					textDecoration: "none"
-					}}>Login</NavLink></h1>
+					}} class="carousel-login-link">Login</NavLink></h1>
 
 				</div>
 

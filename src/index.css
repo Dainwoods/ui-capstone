@@ -138,13 +138,35 @@ body, html {
 	margin-bottom:20px;
 }
 
-/*.carousel-about-link {
-	color: white;
-}*/
-
-.carousel-nav-link {
+.carousel-title {
 	color: white;
 }
+
+.carousel-about-link {
+	color: white;
+
+}
+
+.carousel-login-link {
+	color: white;
+}
+
+
+.title-studio {
+	color: black;
+
+}
+
+.title-about-link {
+	color: black;
+
+}
+
+.title-login-link {
+	color: black;
+
+}
+
 
 /* .movieImage {
 	width: 450px;

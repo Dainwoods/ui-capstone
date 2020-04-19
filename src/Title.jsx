@@ -19,29 +19,41 @@ class Title extends Component {
 		  <div className="title-container">
 				<div className="titleBarText"> 
 					<h1><NavLink to={"/home"}
+					style={{
+							textDecoration: "none",
+						}}
 						activeStyle={{
     					fontWeight: "bold",
     					color: "black",
     					textDecoration: "none"
-  					}}>Studio Ghibli</NavLink></h1>
+  					}} class="title-studio">Studio Ghibli</NavLink></h1>
 
 				</div>
 
 				<div className="menu-container"> 
 
 					<h1><NavLink to={"/about"}
+						style={{
+							textDecoration: "none",
+						}}
+
 						activeStyle={{
-    					fontWeight: "bold",
-    					color: "black",
-    					textDecoration: "none"
-					}}>About</NavLink></h1>
+	    					fontWeight: "bold",
+	    					color: "black",
+	    					textDecoration: "none"
+						}}
+						class="title-about-link">About</NavLink></h1>
 
 					<h1><NavLink to={"/login"}
+						style={{
+							textDecoration: "none",
+						}}
 						activeStyle={{
-    					fontWeight: "bold",
-    					color: "black",
-    					textDecoration: "none"
-					}}>Login</NavLink></h1>
+	    					fontWeight: "bold",
+	    					color: "black",
+	    					textDecoration: "none"
+						}}
+						class="title-about-link">Login</NavLink></h1>
 
 					{/*<h1><NavLink to={"/about"}>About</NavLink></h1>
 										<h1><NavLink className="nav-link" to={"/login"}>Login</NavLink></h1>*/}
