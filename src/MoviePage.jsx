@@ -1,26 +1,34 @@
 import React, { Component } from "react";
 import Title from "./Title";
 import Divider from "./Divider";
+import './MoviePage.css'
+
 class MoviePage extends Component {
 	render() {
 		return (
 			<div classname="App">
+
 				<Title/>
-				<Divider/>
-				<div className="moviePage">
-					<div className="movieIntro">
-						<h1 className="movTitle">{this.props.movie.name}</h1>
-						<h2>{this.props.movie.genre}</h2>
-						<h3>{this.props.movie.director}</h3>
+
+				<div className="movie-container">
+
+					<div class="movie-img-container">
+						<img src={ require(`${ this.props.movie.pic }`)} class="movieImage" id="movieImg"/>
 					</div>
-					<div className="movieDetails">
-						<div className="movVisuals">
-							<img src={ require(`${ this.props.movie.pic }`)} class="movieImage" id="moviePageImg"/>
-							<h4><a href={this.props.movie.storePage}>Purchase</a></h4>
+
+				
+					<div class="movie-details-container">
+						<div class="movie-firstLine">
+							<h1 id="movTitle">{this.props.movie.name}</h1>
+							<h2 id="genre">{this.props.movie.genre}</h2>
 						</div>
-						<h4 class="movie-description">{this.props.movie.description}</h4>
+						<h3 id="director">{this.props.movie.director}</h3>
+						<h4 id="description">{this.props.movie.description}</h4>
+						<a href={this.props.movie.storePage}>BUY</a>
 					</div>
+
 				</div>
+
 			</div>	
     );
   }
