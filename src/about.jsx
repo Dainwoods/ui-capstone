@@ -12,7 +12,7 @@ class AboutPage extends Component {
 				<div class="about-container">
 
 					<div class="about-img-container">
-						<img src={aboutImg} alt="Image" class="img"/>
+						<img src={aboutImg} alt="Image" class="about-img"/>
 					</div>
 
 					<div class="content-container">
