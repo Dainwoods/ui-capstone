@@ -16,16 +16,13 @@ class Title extends Component {
 
 	render() {
 		return (
-		  <div className="titleBar">
+		  <div className="title-container">
 				<div className="titleBarText"> 
 					<h1><Link to={"/home"}>Studio Ghibli</Link></h1>
 				</div>
 
-				<div className="titleBarAbout"> 
+				<div className="menu-container"> 
 					<h1><Link to={"/about"}>About</Link></h1>
-				</div>
-
-				<div className="titleBarLogin"> 
 					<h1><Link className="nav-link" to={"/login"}>Login</Link></h1>
 				</div>
 		  </div>

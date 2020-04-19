@@ -32,7 +32,7 @@ body, html {
 	position: relative;
 }
 
-/*.titleText {
+.titleText {
 	display: inline-block;
 	text-align: center;
 	margin-right: 30px;
@@ -40,9 +40,9 @@ body, html {
 }
 
 .titleBar {
-  width: 100%;
+/*  width: 100%;
   margin: 0px;
-  padding: 0px;
+  padding: 0px;*/
 }
 
 .titleBar h1 {
@@ -51,10 +51,9 @@ body, html {
 }
 
 .titleBarText {
-  display: inline-block;
-  width: 70%;
-  margin: 0px;
-  padding-left: 3%;
+  position: absolute;
+  top: 32px;
+  left: 25px;
 }
 
 .titleBarText h1 {
@@ -79,30 +78,7 @@ body, html {
 
 .titleBarLogin h1 {
 	font-size: 20px;
-}*/
-
-
-/*.titleText h1 {
-	font-family: 'Barlow';
-	margin-top: 10px;
-	text-align: left;
-	font-size: 2vw;
 }
-
-.titleText h2 {
-	font-family: 'Barlow';
-	font-weight:bold;
-	font-size: 28px;
-	padding-bottom:10px;
-}
-
-.titleText h5 {
-	font-family: 'Barlow', sans-serif;
-	font-weight:bold;
-	font-size: 15px;
-	color: #969696;
-	margin-bottom:15px;
-}*/
 
 .title-container {
 	position: relative;
