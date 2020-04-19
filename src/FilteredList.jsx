@@ -87,6 +87,7 @@ class FilteredList extends Component {
 		return (
 
 			<div className="filter-list">
+
 				<button id="reset" onClick={this.resetFilters}>Reset</button>
 				<button id="favorites" onClick={this.toggleFavorites}>Toggle Favorites</button>
 

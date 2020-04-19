@@ -361,3 +361,7 @@ button:after {
 	justify-content: space-around;
 
 }
+
+.filter-list {
+	padding-top: 30px;
+}
