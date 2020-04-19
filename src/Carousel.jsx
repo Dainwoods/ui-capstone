@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import List from "./List";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link
+  } from "react-router-dom";
 
 class Carousel extends Component {
 	constructor(props) {
@@ -68,9 +74,25 @@ class Carousel extends Component {
 		);*/
 
 		return (
-			<div className="title">
+
+
+			<div className="title-container">
+
+
 				<img className="carouselImage" src={ require(`${ this.props.pics[this.state.index].img }`)} style={{filter: "brightness(" + this.state.brightness + "%)"}} />
+
+				<div class="title-centered">
+					<h1><Link to={"/home"}>Studio Ghibli</Link></h1>
+				</div>
+
+				<div class="menu-container">
+					<h1><Link to={"/about"}>About</Link></h1>
+					<h1><Link className="nav-link" to={"/login"}>Login</Link></h1>
+				</div>
+
 			</div>
+
+
 		);
   }
 }

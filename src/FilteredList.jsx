@@ -3,7 +3,8 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 import List from "./List";
 import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
 import InstagramEmbed from 'react-instagram-embed';
-import {Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
 class FilteredList extends Component {
 	constructor(props) {
 		super(props);
