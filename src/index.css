@@ -358,8 +358,12 @@ button:after {
 .socialMedia {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: center;
+	padding-top: 50px;
+}
 
+.socialItems {
+	margin: 100px;
 }
 
 .filter-list {

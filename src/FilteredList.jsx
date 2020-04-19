@@ -179,13 +179,13 @@ class FilteredList extends Component {
 
 			<div class="socialMedia">
 
-				<div>
+				<div class="socialItems">
 					<TwitterTimelineEmbed/>
 					<a class="twitter-timeline" data-width="600" data-height="500" data-theme="light" href="https://twitter.com/ItsGhibli"></a>
 					<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 				</div>	
 
-				<div>
+				<div class="socialItems">
 				<InstagramEmbed
 				  url='https://instagr.am/p/B9W7AQOlXmh/'
 				  maxWidth={400}
