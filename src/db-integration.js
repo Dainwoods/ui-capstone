@@ -39,7 +39,7 @@ const instance = axios.create({
     rejectUnauthorized: false
   })
   });
-console.log("datattt  ", instance.get('https://localhost:3000/login').response().data);
+// console.log("datattt  ", router.route("/create-user").get('https://localhost:3000/login').response().data);
 // getData();
 db.query(`CREATE TABLE IF NOT EXISTS Users (
     UserId serial PRIMARY KEY,
@@ -57,11 +57,11 @@ db.query(`CREATE TABLE IF NOT EXISTS Users (
   .catch((err) => {
     console.log(err);
   });
-app.route('https://localhost:3000/login').get((req, res, next) => {
+app.route('/login').get((req, res, next) => {
   console.log("requests: ", req)
-  addUser(req.params.usernameNEW, req.params.passwordNEW)
+  // addUser(req.params.usernameNEW, req.params.passwordNEW)
 })
-app.set('port', 3000);
+app.set('port', process.env.PORT || 3000);
 app.listen(3000);
 export const addUser = (username, password) => {
     const salt = Math.random(32);

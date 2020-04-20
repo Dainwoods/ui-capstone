@@ -5,6 +5,8 @@ import { Form, Button } from 'react-bootstrap'
 import https from 'https';
 import Title from "./Title";
 import Divider from "./Divider";
+// import { Router } from 'express';
+
 class LoginPage extends Component {
 
 	constructor(props) {
@@ -47,21 +49,22 @@ class LoginPage extends Component {
 	};
 	submitHandler = e => {
 		e.preventDefault();
-		// axios.post('https://localhost:3000/login', this.state).
-		// then(response => {console.log("successful post: ", response)})
-		// .catch(err => {console.log("error: ", err)});
+		axios.post('https://localhost:3000/login', this.state).
+		then(response => {console.log("successful post: ", response)})
+		.catch(err => {console.log("error: ", err)});
 		const response = fetch('api/', {
 			method: 'POST',
 			body: JSON.stringify(this.state)
-		})
+		});
+		// const router = Router();
 		// const instance = axios.create({
 		// 	httpsAgent: new https.Agent({  
 		// 	  rejectUnauthorized: false
 		// 	})
 		//   });
-		// instance.post('https://localhost:3000/login', this.state).
-		// then(response => {console.log("successful post: ", response)})
-		// .catch(err => {console.log("error: ", err)});
+		// router.post('https://localhost:3000/login', this.state)
+		// then((response) => {console.log("successful post: ", response)})
+		// .catch( (err) => {console.log("error: ", err)});
 		  
 		// let xhr = new XMLHttpRequest();
 		// xhr.open('POST', 'https://localhost:3000/login');
