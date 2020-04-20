@@ -51,7 +51,7 @@ body, html {
 .titleBarText {
   position: absolute;
   top: 32px;
-  left: 25px;
+  left: 50px;
 }
 
 .titleBarText h1 {

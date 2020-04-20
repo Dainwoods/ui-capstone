@@ -18,7 +18,7 @@ class Title extends Component {
 		return (
 		  <div className="title-container">
 				<div className="titleBarText"> 
-					<h1><NavLink to={"/home"}
+					<h1><NavLink to={"/"}
 					style={{
 							textDecoration: "none",
 						}}

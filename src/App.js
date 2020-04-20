@@ -109,7 +109,7 @@ class App extends Component {
 			<Router>
 				<Switch>
 					<Route exact path= '/about' render= { () => <AboutPage about/>}/>
-					<Route exact path='/home' render= { () => <MainPage pics={this.state.pics} 
+					<Route exact path='/' render= { () => <MainPage pics={this.state.pics} 
 					movieList={this.state.movieList} totoro={this.state.totoro} speedUp={this.state.speedUp } loadMoviePage={this.loadMoviePage}/>}/>
 						
 					
