@@ -5,8 +5,10 @@ class MoviePage extends Component {
 	render() {
 		return (
 			<div classname="App">
-				<Title/>
-				<Divider/>
+				<div>
+					<Title/>
+					<Divider/>
+				</div>
 				<div className="moviePage">
 					<div className="movieIntro">
 						<h1 className="movTitle">{this.props.movie.name}</h1>

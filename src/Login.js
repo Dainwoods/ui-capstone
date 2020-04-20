@@ -50,18 +50,18 @@ class LoginPage extends Component {
 		// axios.post('https://localhost:3000/login', this.state).
 		// then(response => {console.log("successful post: ", response)})
 		// .catch(err => {console.log("error: ", err)});
-		const response = fetch('api/', {
-			method: 'POST',
-			body: JSON.stringify(this.state)
-		})
-		// const instance = axios.create({
-		// 	httpsAgent: new https.Agent({  
-		// 	  rejectUnauthorized: false
-		// 	})
-		//   });
-		// instance.post('https://localhost:3000/login', this.state).
-		// then(response => {console.log("successful post: ", response)})
-		// .catch(err => {console.log("error: ", err)});
+		// const response = fetch('api/', {
+		// 	method: 'POST',
+		// 	body: JSON.stringify(this.state)
+		// })
+		const instance = axios.create({
+			httpsAgent: new https.Agent({  
+			  rejectUnauthorized: false
+			})
+		  });
+		instance.post('https://localhost:3000/login', this.state).
+		then(response => {console.log("successful post: ", response)})
+		.catch(err => {console.log("error: ", err)});
 		  
 		// let xhr = new XMLHttpRequest();
 		// xhr.open('POST', 'https://localhost:3000/login');
