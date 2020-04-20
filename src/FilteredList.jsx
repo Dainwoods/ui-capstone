@@ -3,7 +3,8 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 import List from "./List";
 import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
 import InstagramEmbed from 'react-instagram-embed';
-import {Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
 class FilteredList extends Component {
 	constructor(props) {
 		super(props);
@@ -86,6 +87,7 @@ class FilteredList extends Component {
 		return (
 
 			<div className="filter-list">
+
 				<button id="reset" onClick={this.resetFilters}>Reset</button>
 				<button id="favorites" onClick={this.toggleFavorites}>Toggle Favorites</button>
 
@@ -177,13 +179,13 @@ class FilteredList extends Component {
 
 			<div class="socialMedia">
 
-				<div>
+				<div class="socialItems">
 					<TwitterTimelineEmbed/>
 					<a class="twitter-timeline" data-width="600" data-height="500" data-theme="light" href="https://twitter.com/ItsGhibli"></a>
 					<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 				</div>	
 
-				<div>
+				<div class="socialItems">
 				<InstagramEmbed
 				  url='https://instagr.am/p/B9W7AQOlXmh/'
 				  maxWidth={400}

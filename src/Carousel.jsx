@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import List from "./List";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	NavLink,
+  } from "react-router-dom";
 
 class Carousel extends Component {
 	constructor(props) {
@@ -68,9 +74,55 @@ class Carousel extends Component {
 		);*/
 
 		return (
-			<div className="title">
+
+
+			<div className="title-container-mainpage">
+
+
 				<img className="carouselImage" src={ require(`${ this.props.pics[this.state.index].img }`)} style={{filter: "brightness(" + this.state.brightness + "%)"}} />
+
+				<div class="title-centered">
+
+					<h1><NavLink to={"/home"}
+						style={{
+							textDecoration: "none",
+						}}
+						activeStyle={{
+    					fontWeight: "bold",
+    					color: "white",
+    					textDecoration: "none",
+  					}}>Studio Ghibli</NavLink></h1>
+
+				</div>
+
+				<div class="menu-container">
+
+					<h1><NavLink to={"/about"}
+						style={{
+							textDecoration: "none",
+							":hover": { background: "green" }
+						}}
+						activeStyle={{
+    					fontWeight: "bold",
+    					color: "white",
+    					textDecoration: "none"
+					}} class="carousel-about-link">About</NavLink></h1>
+
+					<h1><NavLink to={"/login"}
+						style={{
+							textDecoration: "none",
+						}}
+						activeStyle={{
+    					fontWeight: "bold",
+    					color: "white",
+    					textDecoration: "none"
+					}} class="carousel-login-link">Login</NavLink></h1>
+
+				</div>
+
 			</div>
+
+
 		);
   }
 }

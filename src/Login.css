@@ -1,5 +1,11 @@
 .form-container {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-evenly;
+	padding-top: 100px;
+	justify-content: center;
+	align-items: center;
+}
+
+.eachForm {
+	margin: 100px;
 }

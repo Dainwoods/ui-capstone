@@ -5,7 +5,7 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Link
+	NavLink
   } from "react-router-dom";
 import Login from "./Login.js"
 
@@ -15,24 +15,49 @@ class Title extends Component {
 	}
 
 	render() {
-		//let img = this.props.pics[0];
 		return (
-		  <div className="titleBar">
+		  <div className="title-container">
 				<div className="titleBarText"> 
-				{/* onClick={() => this.props.changePageNumber(0)}> */}
-					<h1><Link to={"/home"}> Studio Ghibli Films </Link></h1>
+					<h1><NavLink to={"/home"}
+					style={{
+							textDecoration: "none",
+						}}
+						activeStyle={{
+    					fontWeight: "bold",
+    					color: "black",
+    					textDecoration: "none"
+  					}} class="title-studio">Studio Ghibli</NavLink></h1>
+
 				</div>
-				<div className="titleBarAbout"> 
-				 {/* onClick={() => this.props.loadAboutPage()}> */}
-					<h1><Link to={"/about"}> About</Link></h1>
+
+				<div className="menu-container"> 
+
+					<h1><NavLink to={"/about"}
+						style={{
+							textDecoration: "none",
+						}}
+
+						activeStyle={{
+	    					fontWeight: "bold",
+	    					color: "black",
+	    					textDecoration: "none"
+						}}
+						class="title-about-link">About</NavLink></h1>
+
+					<h1><NavLink to={"/login"}
+						style={{
+							textDecoration: "none",
+						}}
+						activeStyle={{
+	    					fontWeight: "bold",
+	    					color: "black",
+	    					textDecoration: "none"
+						}}
+						class="title-about-link">Login</NavLink></h1>
+
+					{/*<h1><NavLink to={"/about"}>About</NavLink></h1>
+										<h1><NavLink className="nav-link" to={"/login"}>Login</NavLink></h1>*/}
 				</div>
-				<div className="titleBarLogin"> 
-				{/* onClick={() => 
-					this.props.loadLoginPage()}> */}
-					<h1><Link className="nav-link" to={"/login"}>Login</Link></h1>
-				</div>
-				
-				
 		  </div>
 		);
   }

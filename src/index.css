@@ -40,16 +40,22 @@ body, html {
 }
 
 .titleBar {
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
+
+}
+
+.titleBar h1 {
+	margin-top: 10px;
+	text-align: left;
 }
 
 .titleBarText {
-  display: inline-block;
-  width: 70%;
-  margin: 0px;
-  padding-left: 3%;
+  position: absolute;
+  top: 32px;
+  left: 25px;
+}
+
+.titleBarText h1 {
+	font-size: 33px;
 }
 
 .titleBarAbout {
@@ -58,63 +64,63 @@ body, html {
   margin: 0px;
 }
 
+.titleBarAbout h1 {
+	font-size: 20px;
+}
+
 .titleBarLogin {
   display: inline-block;
   width: 15%;
   margin: 0px;
 }
 
-.titleBarText:hover {
-	color: gray;
+.titleBarLogin h1 {
+	font-size: 20px;
 }
 
-.titleBarAbout:hover {
-	color: gray;
+.title-container-mainpage {
+	position: relative;
+	text-align: center;
 }
 
-.titleBarLogin:hover {
-	color: gray;
+.title-container {
+	position: relative;
+	text-align: center;
 }
 
-
-
-.titleBar h1 {
-	font-family: 'Barlow';
-	margin-top: 10px;
-  text-align: left;
-  font-size: 3vw;
+.title-centered {
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	color: white;
 }
 
-.titleText h1 {
-	font-family: 'Barlow';
-	margin-top: 10px;
-  text-align: left;
+.title-centered h1 {
+	font-size: 60px;
+	font-style: bold;
 }
 
-.titleText h2 {
-	font-family: 'Barlow';
-	font-weight:bold;
-	font-size: 28px;
-	padding-bottom:10px;
+.menu-container {
+	position: absolute;
+  	top: 8px;
+  	right: 16px;
+  	display: flex;
+  	align-items: baseline;
+  	padding: 10px;
+
 }
 
-.titleText h5 {
-	font-family: 'Barlow', sans-serif;
-	font-weight:bold;
-	font-size: 15px;
-	color: #969696;
-	margin-bottom:15px;
+.menu-container h1 {
+	font-size: 24px;
+	margin: 10px;
 }
 
 .carouselImage {
-
-
 	height: 100vh;
-  min-height: 500px;
-  width: 100%;
-
-  background: black;
-
+	min-height: 500px;
+  	width: 100%;
+  	background: black;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -131,6 +137,36 @@ body, html {
 	height: 216px;
 	margin-bottom:20px;
 }
+
+.carousel-title {
+	color: white;
+}
+
+.carousel-about-link {
+	color: white;
+
+}
+
+.carousel-login-link {
+	color: white;
+}
+
+
+.title-studio {
+	color: black;
+
+}
+
+.title-about-link {
+	color: black;
+
+}
+
+.title-login-link {
+	color: black;
+
+}
+
 
 /* .movieImage {
 	width: 450px;
@@ -322,6 +358,14 @@ button:after {
 .socialMedia {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: center;
+	padding-top: 50px;
+}
 
+.socialItems {
+	margin: 100px;
+}
+
+.filter-list {
+	padding-top: 30px;
 }
