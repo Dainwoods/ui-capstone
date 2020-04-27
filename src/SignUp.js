@@ -5,8 +5,6 @@ import { Form, Button } from 'react-bootstrap'
 import https from 'https';
 import Title from "./Title";
 import Divider from "./Divider";
-//import getLogin from './server.js'
-//import sendDataPost from "./db-integration"
 // import { Router } from 'express';
 import {
 	BrowserRouter as Router,
@@ -15,7 +13,7 @@ import {
 	NavLink
   } from "react-router-dom";
 
-class LoginPage extends Component {
+class SignUpPage extends Component {
 
 	constructor(props) {
 		super(props);
@@ -23,34 +21,34 @@ class LoginPage extends Component {
 		// sign IN is considered OLD, since you already have an account
 		// sign UP is considered NEW, since you must create an account
 		this.state = {
-			usernameOLD: "",
-			passwordOLD: "",
+			usernameNEW: "",
+			passwordNEW: "",
 
 		};
 
 	}
 
-	setUsernameOLD = event => {
-		this.setState({usernameOLD: event.target.value});
+	setUsernameNEW = event => {
+		this.setState({usernameNEW: event.target.value});
 	};
 
-	setPasswordOLD = event => {
-		this.setState({passwordOLD: event.target.value});
+	setPasswordNEW = event => {
+		this.setState({passwordNEW: event.target.value});
 	};
 
-	checkCompletionOLD = () => {
-		return this.state.usernameOLD.length > 0 && this.state.passwordOLD.length > 0;
+	checkCompletionNEW = () => {
+		return this.state.usernameNEW.length > 0 && this.state.passwordNEW.length > 0;
 	};
 
 	submitHandler = e => {
 		e.preventDefault();
-		axios({url: '/app/login', method: 'post', data: this.state}).
-		then((response) => {console.log("successful post: ", response)})
+		axios.post('https://localhost:3000/login', this.state).
+		then(response => {console.log("successful post: ", response)})
 		.catch(err => {console.log("error: ", err)});
-		// const response = fetch('api/', {
-		// 	method: 'POST',
-		// 	body: JSON.stringify(this.state)
-		// });
+		const response = fetch('api/', {
+			method: 'POST',
+			body: JSON.stringify(this.state)
+		});
 		// const router = Router();
 		// const instance = axios.create({
 		// 	httpsAgent: new https.Agent({  
@@ -73,22 +71,23 @@ class LoginPage extends Component {
 				<Title/>
 
 				<div class="form-container">
-					<div class="eachForm">
-						<Form>
-							<Form.Label>Sign In</Form.Label>
-							<Form.Group controlId="signInID">
-								<Form.Control type="text" placeholder="ID" onChange={this.setUsernameOLD}/>
+
+		  			<div class="eachForm">
+			  			<Form>
+			  				<Form.Label>Sign Up</Form.Label>
+			  				<Form.Group controlId="signUpID">
+								<Form.Control type="text" placeholder="ID" onChange={this.setUsernameNEW}/>
 							</Form.Group>
-							<Form.Group controlId="signInPW">
-								<Form.Control type="text" placeholder="Password" onChange={this.setPasswordOLD}/>
+							<Form.Group controlId="signUpPW">
+								<Form.Control type="text" placeholder="Password" onChange={this.setPasswordNEW}/>
 							</Form.Group>
-							<Button variant="primary" type="submit" disabled={!this.checkCompletionOLD()}>Submit</Button>
-			  			</Form>
-		  			</div>
+							<Button variant="primary" type="submit" disabled={!this.checkCompletionNEW()} onClick={this.submitHandler}>Submit</Button>
+						</Form>
+					</div>
 				</div>
 
-				<p> Not a member?
-					<NavLink to={"/signUp"}
+				<p> Already a member?
+					<NavLink to={"/login"}
 						style={{
 							textDecoration: "none",
 						}}
@@ -97,7 +96,7 @@ class LoginPage extends Component {
 	    					color: "black",
 	    					textDecoration: "none"
 						}}
-						class="signUp-link"> Sign Up
+						class="signUp-link"> Login
 					</NavLink> now
 				</p>
 
@@ -107,4 +106,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default SignUpPage;

@@ -3,6 +3,7 @@ import aboutImg from './images/aboutImg.jpg'
 import './About.css'
 import Title from "./Title";
 import Divider from "./Divider";
+
 class AboutPage extends Component {
 	render() {
 		return (

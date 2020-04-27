@@ -4,15 +4,12 @@
 	padding-top: 120px;
 	padding-left: 100px;
 	align-items: center;
+	justify-content: center;
 }
 
 .content-container {
 	display: flex;
 	flex-wrap: wrap;
-}
-
-.about-img-container {
-	padding-right: 40px;
 }
 
 .about-img {
@@ -21,7 +18,7 @@
 }
 
 .paragraph-container {
-	padding-left: 30px;
+	margin: 30px;
 	display: flex;
 	flex-direction: column;
 	max-width: 870px;

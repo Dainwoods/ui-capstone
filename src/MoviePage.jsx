@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Title from "./Title";
 import Divider from "./Divider";
-import './MoviePage.css'
+import './movie-details.css'
 
 class MoviePage extends Component {
 	render() {

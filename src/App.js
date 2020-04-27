@@ -13,6 +13,7 @@ import AboutPage from "./about"
 import { BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom';
 import Navigation from "./Navigation"
 import LoginPage from "./Login"
+import SignUpPage from "./SignUp"
 import MainPage from "./MainPage"
 
 class App extends Component {
@@ -108,12 +109,13 @@ class App extends Component {
 			<Router>
 				<Switch>
 					<Route exact path= '/about' render= { () => <AboutPage about/>}/>
-					<Route exact path='/home' render= { () => <MainPage pics={this.state.pics} 
+					<Route exact path='/' render= { () => <MainPage pics={this.state.pics} 
 					movieList={this.state.movieList} totoro={this.state.totoro} speedUp={this.state.speedUp } loadMoviePage={this.loadMoviePage}/>}/>
 						
 					
 					<Route exact path='/moviePage' render= { () => <MoviePage movie={this.state.movieList[this.state.currentMovie]}/>}/>
 					<Route exact path='/login' render={ () => <LoginPage login/>}></Route>
+					<Route exact path='/signup' render={ () => <SignUpPage signup/>}></Route>
 				</Switch>
 			</Router>
 

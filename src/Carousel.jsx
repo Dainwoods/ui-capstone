@@ -83,15 +83,7 @@ class Carousel extends Component {
 
 				<div class="title-centered">
 
-					<h1><NavLink to={"/home"}
-						style={{
-							textDecoration: "none",
-						}}
-						activeStyle={{
-    					fontWeight: "bold",
-    					color: "white",
-    					textDecoration: "none",
-  					}}>Studio Ghibli</NavLink></h1>
+					<h1>STUDIO GHIBLI</h1>
 
 				</div>
 

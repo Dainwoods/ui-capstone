@@ -51,7 +51,7 @@ body, html {
 .titleBarText {
   position: absolute;
   top: 32px;
-  left: 25px;
+  left: 50px;
 }
 
 .titleBarText h1 {
@@ -97,8 +97,11 @@ body, html {
 }
 
 .title-centered h1 {
-	font-size: 60px;
-	font-style: bold;
+	font-size: 80px;
+	letter-spacing: 5px;
+	font-style: 9000;
+	text-shadow: -1px -1px 1px #555,
+	  	         1px 1px 1px #666;
 }
 
 .menu-container {
