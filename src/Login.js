@@ -44,26 +44,10 @@ class LoginPage extends Component {
 
 	submitHandler = e => {
 		e.preventDefault();
-		axios({url: '/app/login', method: 'post', data: this.state}).
+		axios({url: '/login', method: 'post', data: this.state}).
 		then((response) => {console.log("successful post: ", response)})
 		.catch(err => {console.log("error: ", err)});
-		// const response = fetch('api/', {
-		// 	method: 'POST',
-		// 	body: JSON.stringify(this.state)
-		// });
-		// const router = Router();
-		// const instance = axios.create({
-		// 	httpsAgent: new https.Agent({  
-		// 	  rejectUnauthorized: false
-		// 	})
-		//   });
-		// router.post('https://localhost:3000/login', this.state)
-		// then((response) => {console.log("successful post: ", response)})
-		// .catch( (err) => {console.log("error: ", err)});
-		  
-		// let xhr = new XMLHttpRequest();
-		// xhr.open('POST', 'https://localhost:3000/login');
-		// xhr.send(JSON.stringify({ example: 'data' }))
+		
 		
 	}
 
@@ -82,7 +66,7 @@ class LoginPage extends Component {
 							<Form.Group controlId="signInPW">
 								<Form.Control type="text" placeholder="Password" onChange={this.setPasswordOLD}/>
 							</Form.Group>
-							<Button variant="primary" type="submit" disabled={!this.checkCompletionOLD()}>Submit</Button>
+							<Button variant="primary" type="submit" disabled={!this.checkCompletionOLD()} onClick={this.submitHandler}>Submit</Button>
 			  			</Form>
 		  			</div>
 				</div>
