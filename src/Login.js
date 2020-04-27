@@ -5,6 +5,8 @@ import { Form, Button } from 'react-bootstrap'
 import https from 'https';
 import Title from "./Title";
 import Divider from "./Divider";
+//import getLogin from './server.js'
+//import sendDataPost from "./db-integration"
 // import { Router } from 'express';
 
 class LoginPage extends Component {
@@ -49,13 +51,13 @@ class LoginPage extends Component {
 	};
 	submitHandler = e => {
 		e.preventDefault();
-		axios.post('https://localhost:3000/login', this.state).
-		then(response => {console.log("successful post: ", response)})
+		axios({url: '/app/login', method: 'post', data: this.state}).
+		then((response) => {console.log("successful post: ", response)})
 		.catch(err => {console.log("error: ", err)});
-		const response = fetch('api/', {
-			method: 'POST',
-			body: JSON.stringify(this.state)
-		});
+		// const response = fetch('api/', {
+		// 	method: 'POST',
+		// 	body: JSON.stringify(this.state)
+		// });
 		// const router = Router();
 		// const instance = axios.create({
 		// 	httpsAgent: new https.Agent({  
