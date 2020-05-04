@@ -5,10 +5,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./db');
 const mysql = require('mysql');
+app.use('/login', getLogin);
 app.get('/hello', (req, res) => res.send('Hello World!'));
 app.set('port', process.env.PORT || 3000);
 app.listen(3000);
-app.use('/login', getLogin);
+
 
 app.post( '/home', (req, res) => {
  
