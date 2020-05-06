@@ -20,35 +20,49 @@ class LoginPage extends Component {
 	constructor(props) {
 		super(props);
 
-		// sign IN is considered OLD, since you already have an account
+		// sign IN is considered , since you already have an account
 		// sign UP is considered NEW, since you must create an account
 		this.state = {
-			usernameOLD: "",
-			passwordOLD: "",
+			username: "",
+			password: "",
 
 		};
 
+		this.submitHandler = this.submitHandler.bind(this);
+
 	}
 
-	setUsernameOLD = event => {
-		this.setState({usernameOLD: event.target.value});
+	setUsername = event => {
+		this.setState({username: event.target.value});
 	};
 
-	setPasswordOLD = event => {
-		this.setState({passwordOLD: event.target.value});
+	setPassword = event => {
+		this.setState({password: event.target.value});
 	};
 
-	checkCompletionOLD = () => {
-		return this.state.usernameOLD.length > 0 && this.state.passwordOLD.length > 0;
+	checkCompletion = () => {
+		return this.state.username.length > 0 && this.state.password.length > 0;
 	};
 
-	submitHandler = e => {
+	// submitHandler = e => {
+	// 	e.preventDefault();
+	// 	axios({url: '/login', method: 'post', data: this.state}).
+	// 	then((response) => {console.log("successful post: ", response)})
+	// 	.catch(err => {console.log("error: ", err)});
+	// }
+
+	submitHandler(e){
 		e.preventDefault();
-		axios({url: '/login', method: 'post', data: this.state}).
-		then((response) => {console.log("successful post: ", response)})
-		.catch(err => {console.log("error: ", err)});
-		
-		
+		console.log('submitting');
+
+		axios.post('/login',
+			{ username:this.state.username,
+			password:this.state.password })
+		.then((response)=> {
+			console.log(response);
+		}, (error) => {
+			console.log(error)
+		});
 	}
 
 	render() {
@@ -61,12 +75,12 @@ class LoginPage extends Component {
 						<Form>
 							<Form.Label>Sign In</Form.Label>
 							<Form.Group controlId="signInID">
-								<Form.Control type="text" placeholder="ID" onChange={this.setUsernameOLD}/>
+								<Form.Control type="text" placeholder="ID" onChange={this.setUsername}/>
 							</Form.Group>
 							<Form.Group controlId="signInPW">
-								<Form.Control type="text" placeholder="Password" onChange={this.setPasswordOLD}/>
+								<Form.Control type="text" placeholder="Password" onChange={this.setPassword}/>
 							</Form.Group>
-							<Button variant="primary" type="submit" disabled={!this.checkCompletionOLD()} onClick={this.submitHandler}>Submit</Button>
+							<Button variant="primary" type="submit" disabled={!this.checkCompletion()} onClick={this.submitHandler}>Submit</Button>
 			  			</Form>
 		  			</div>
 				</div>

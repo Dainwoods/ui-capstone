@@ -19,36 +19,59 @@ class SignUpPage extends Component {
 		super(props);
 
 		// sign IN is considered OLD, since you already have an account
-		// sign UP is considered NEW, since you must create an account
+		// sign UP is considered , since you must create an account
 		this.state = {
-			usernameNEW: "",
-			passwordNEW: "",
+			username: "",
+			password: "",
 
 		};
 
+		this.submitHandler = this.submitHandler.bind(this)
+
 	}
 
-	setUsernameNEW = event => {
-		this.setState({usernameNEW: event.target.value});
+	setUsername = event => { 
+		this.setState({username: event.target.value});
 	};
 
-	setPasswordNEW = event => {
-		this.setState({passwordNEW: event.target.value});
+	setPassword = event => {
+		this.setState({password: event.target.value});
 	};
 
-	checkCompletionNEW = () => {
-		return this.state.usernameNEW.length > 0 && this.state.passwordNEW.length > 0;
+	checkCompletion = () => {
+		return this.state.username.length > 0 && this.state.password.length > 0;
 	};
 
-	submitHandler = e => {
-		e.preventDefault();
-		axios.post('https://localhost:3000/login', this.state).
-		then(response => {console.log("successful post: ", response)})
-		.catch(err => {console.log("error: ", err)});
-		const response = fetch('api/', {
-			method: 'POST',
-			body: JSON.stringify(this.state)
+	submitHandler(e) {
+		// const {username, password} = this.state;
+
+		axios
+		.post(
+			"/signUp",
+			{ username: this.state.username,
+			password: this.state.password },
+			{ withCredentials: true}
+			)
+		.then(response => {
+			console.log(response);
+		})
+		.catch(error => {
+			console.log(error.response);
 		});
+		e.preventDefault(); 
+	}
+
+	// submitHandler = e => {
+	// 	e.preventDefault();
+	// 	axios.post('https://localhost:3000/login', this.state).
+	// 	then(response => {console.log("successful post: ", response)})
+	// 	.catch(err => {console.log("error: ", err)});
+	// 	const response = fetch('api/', {
+	// 		method: 'POST',
+	// 		body: JSON.stringify(this.state)
+	// 	});
+
+
 		// const router = Router();
 		// const instance = axios.create({
 		// 	httpsAgent: new https.Agent({  
@@ -63,7 +86,7 @@ class SignUpPage extends Component {
 		// xhr.open('POST', 'https://localhost:3000/login');
 		// xhr.send(JSON.stringify({ example: 'data' }))
 		
-	}
+	
 
 	render() {
 		return (
@@ -76,12 +99,12 @@ class SignUpPage extends Component {
 			  			<Form>
 			  				<Form.Label>Sign Up</Form.Label>
 			  				<Form.Group controlId="signUpID">
-								<Form.Control type="text" placeholder="ID" onChange={this.setUsernameNEW}/>
+								<Form.Control type="text" placeholder="ID" onChange={this.setUsername}/>
 							</Form.Group>
 							<Form.Group controlId="signUpPW">
-								<Form.Control type="text" placeholder="Password" onChange={this.setPasswordNEW}/>
+								<Form.Control type="text" placeholder="Password" onChange={this.setPassword}/>
 							</Form.Group>
-							<Button variant="primary" type="submit" disabled={!this.checkCompletionNEW()} onClick={this.submitHandler}>Submit</Button>
+							<Button variant="primary" type="submit" disabled={!this.checkCompletion()} onClick={this.submitHandler}>Submit</Button>
 						</Form>
 					</div>
 				</div>

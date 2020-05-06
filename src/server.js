@@ -6,16 +6,8 @@ const bodyParser = require('body-parser');
 const connection = require('./db');
 const mysql = require('mysql');
 
-app.use('/login', getLogin);
 app.get('/hello', (req, res) => res.send('Hello World!'));
 app.set('port', process.env.PORT || 3000);
-app.listen(3000);
-
-
-//const axios = require('axios');
-app.get('/hello', (req, res) => res.send('Hello World!'));
-app.set('port', process.env.PORT || 3000);
-
 
 app.listen(app.get('port'), function() {
   console.log('Server started on port '+app.get('port'));
@@ -42,11 +34,13 @@ app.get('/home', (req, res) => {
   console.log(req.params);
   
 });
+
 app.get('/login', (req, res) => {
   console.log('WHHEEHEHEEH for what');
   console.log(req.params);
   connection.query(
-    "SELECT * FROM `Users` WHERE Username = ? AND Password = ?", req.params.username, req.params.password,
+    // 'SELECT Username, Salt, Password, Type FROM Users WHERE UserId = $1', [userId],
+    'SELECT Username, Salt, Password, Type FROM Users WHERE Username = $1', req.params.username,
     function(error, rows, fields) {
       if (error) throw error;
       res.json(rows);
@@ -55,6 +49,23 @@ app.get('/login', (req, res) => {
     }
   );
 });
+
+
+app.get('/signUp', (req, res) => {
+  console.log('WHHEEHEHEEH for what');
+  console.log(req.params);
+  connection.query(
+    // 'SELECT Username, Salt, Password, Type FROM Users WHERE UserId = $1', [userId],
+    'SELECT Username, Salt, Password, Type FROM Users WHERE Username = $1', req.params.username,
+    function(error, rows, fields) {
+      if (error) throw error;
+      res.json(rows);
+      console.log(rows[0]);
+      res.send(rows);
+    }
+  );
+});
+
 // axios.get('http://dummy.restapiexample.com/api/v1/create', (req, res) => {
 //   console.log('gotten   ');
 // })
