@@ -42,14 +42,16 @@ class LoginPage extends Component {
 		return this.state.usernameOLD.length > 0 && this.state.passwordOLD.length > 0;
 	};
 
-	submitHandler = e => {
+	submitLogin = e => {
 		e.preventDefault();
-		axios({url: '/login', method: 'post', data: this.state}).
-		then((response) => {console.log("successful post: ", response)})
-		.catch(err => {console.log("error: ", err)});
 		
+		axios.post('/login', this.state).
+			then((res) => {
+				console.log('success postss: ', res.data)	
+			}).catch((error) => console.log(error));
 		
 	}
+	
 
 	render() {
 		return (
@@ -66,7 +68,7 @@ class LoginPage extends Component {
 							<Form.Group controlId="signInPW">
 								<Form.Control type="text" placeholder="Password" onChange={this.setPasswordOLD}/>
 							</Form.Group>
-							<Button variant="primary" type="submit" disabled={!this.checkCompletionOLD()} onClick={this.submitHandler}>Submit</Button>
+							<Button variant="primary" type="submit" disabled={!this.checkCompletionOLD()} onClick={this.submitLogin}>Submit</Button>
 			  			</Form>
 		  			</div>
 				</div>

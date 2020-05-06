@@ -42,26 +42,10 @@ class SignUpPage extends Component {
 
 	submitHandler = e => {
 		e.preventDefault();
-		axios.post('https://localhost:3000/login', this.state).
-		then(response => {console.log("successful post: ", response)})
-		.catch(err => {console.log("error: ", err)});
-		const response = fetch('api/', {
-			method: 'POST',
-			body: JSON.stringify(this.state)
-		});
-		// const router = Router();
-		// const instance = axios.create({
-		// 	httpsAgent: new https.Agent({  
-		// 	  rejectUnauthorized: false
-		// 	})
-		//   });
-		// router.post('https://localhost:3000/login', this.state)
-		// then((response) => {console.log("successful post: ", response)})
-		// .catch( (err) => {console.log("error: ", err)});
-		  
-		// let xhr = new XMLHttpRequest();
-		// xhr.open('POST', 'https://localhost:3000/login');
-		// xhr.send(JSON.stringify({ example: 'data' }))
+		axios.post('/signUp', this.state).then(response => {
+			console.log("successful signup post: ", response.data)
+		}).catch(err => {console.log("error: ", err)});
+		
 		
 	}
 
