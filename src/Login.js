@@ -48,9 +48,13 @@ class LoginPage extends Component {
 		axios.post('/login', this.state).
 			then((res) => {
 				console.log('success postss: ', res.data);
+				// successful login
 				if (res.data.success) {
+					this.state.isLoggedIn = true;
 					console.log('we trying  ', this.props);
 					this.props.history.push( '/');
+					
+				// couldn't log in
 				} else {
 					//error handling
 				}
@@ -62,8 +66,8 @@ class LoginPage extends Component {
 
 	render() {
 
-		if (this.state.successfulLogin){
-			return <Redirect to='/'/>;
+		if (this.state.isLoggedIn){
+			
 		}
 
 		return (

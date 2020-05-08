@@ -109,6 +109,8 @@ class App extends Component {
 		this.setState({hasUser: true, user: username})
 	}
 
+	
+
 	render() {
 
 		return (

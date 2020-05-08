@@ -58,6 +58,16 @@ app.post('/signup', (req, res) =>  {
   });
 });
 
+
+app.post('/ifSession', (req, res) => {
+  if (req.session.user === undefined) {
+    res.send({session: false});
+  } else {
+    res.send({success: true});
+  }
+});
+
+
 app.post('/favorite', (req, res) => {  
   if (req.session.user === undefined) {
     res.send({success: 'no-user'});
