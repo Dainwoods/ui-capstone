@@ -1,21 +1,28 @@
 require('dotenv').config()
 
 const express = require('express');
+const router = express.Router();
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./db');
 const mysql = require('mysql');
+const crypto = require ('crypto');
 
-app.get('/hello', (req, res) => res.send('Hello World!'));
+
 app.set('port', process.env.PORT || 3000);
-
 app.listen(app.get('port'), function() {
-  console.log('Server started on port '+app.get('port'));
+  console.log('Server started on port '+ app.get('port'));
 });
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 app.use('/', express.static('../build'))
-app.post( '/home', (req, res) => {
- 
+
+app.get('http://localhost:3000/', (req, res) => {
+  console.log('home: ', req.params)
   connection.query(`CREATE TABLE IF NOT EXISTS Users ( UserId serial PRIMARY KEY,
         Username varchar(60) UNIQUE NOT NULL,
         Salt varchar(32) NOT NULL,
@@ -26,65 +33,41 @@ app.post( '/home', (req, res) => {
         Username varchar(60) REFERENCES Users(Username),
         MovieId int NOT NULL
       );`);
-      res.send('successful');
-  
     });
+const getUser = (req, res) => {
+  password = crypto.createHash('sha256').update(req.body.passwordOLD).digest('hex')
+  return connection.query(
+      "SELECT * FROM Users WHERE Username = ? AND Password = ? ;", [req.body.usernameOLD, password],
+      function(error, rows) {
+        if (error) throw error;
+        console.log('rows found:  '  , rows);
+        res.send({rows: rows, tst: "betterTest"});
+      }
+    )
+  }
 
-app.get('/home', (req, res) => {
-  console.log(req.params);
-  
+const addUser = (req, res) => {
+  const salt = crypto.randomBytes(32 / 2).toString('hex');
+  const hashedPassword = crypto.createHash('sha256').update(req.body.passwordNEW).digest('hex');
+  console.log('hasehd:  ', hashedPassword);
+  return connection.query (
+  "INSERT INTO Users(Username, Salt, Password) VALUES(?, ?, ?);", [req.body.usernameNEW, salt, hashedPassword],
+  function(err, rows) {
+    if (err) throw err;
+    console.log('rowss inserted: ', rows);
+    res.send({rows: rows, signUpTest: 'test'});
+  }
+)}
+
+app.post('/login', (req, res, next) => {
+  console.log('back end post data: ', req.body);
+  getUser(req, res);
 });
 
-app.get('/login', (req, res) => {
-  console.log('WHHEEHEHEEH for what');
-  console.log(req.params);
-  connection.query(
-    // 'SELECT Username, Salt, Password, Type FROM Users WHERE UserId = $1', [userId],
-    'SELECT Username, Salt, Password, Type FROM Users WHERE Username = $1', req.params.username,
-    function(error, rows, fields) {
-      if (error) throw error;
-      res.json(rows);
-      console.log(rows[0]);
-      res.send(rows);
-    }
-  );
+app.post('/signup', (req, res, next) =>  {
+  console.log('sign up backend post data: ', req.body);
+  addUser(req, res);
 });
-
-
-app.get('/signUp', (req, res) => {
-  console.log('WHHEEHEHEEH for what');
-  console.log(req.params);
-  connection.query(
-    // 'SELECT Username, Salt, Password, Type FROM Users WHERE UserId = $1', [userId],
-    'SELECT Username, Salt, Password, Type FROM Users WHERE Username = $1', req.params.username,
-    function(error, rows, fields) {
-      if (error) throw error;
-      res.json(rows);
-      console.log(rows[0]);
-      res.send(rows);
-    }
-  );
-});
-
-// axios.get('http://dummy.restapiexample.com/api/v1/create', (req, res) => {
-//   console.log('gotten   ');
-// })
-// app.get( 'http://dummy.restapiexample.com/api/v1/create', (req, res) => {
-//     console.log('routeddddd ', req);
-//     connection.query(
-//       "SELECT * FROM `Users` WHERE Username = ? AND Password = ?", username, password,
-//       function(error, rows, fields) {
-//         if (error) throw error;
-//         res.json(rows);
-//         console.log(rows[0]);
-//         res.send(rows);
-//       }
-//     );
-// });
-
 
 
 app.get('/status', (req, res) => res.send('Working!'));
-
-
-

@@ -5,14 +5,13 @@ import { Form, Button } from 'react-bootstrap'
 import https from 'https';
 import Title from "./Title";
 import Divider from "./Divider";
-//import getLogin from './server.js'
-//import sendDataPost from "./db-integration"
-// import { Router } from 'express';
+
 import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	NavLink
+	NavLink,
+	Redirect
   } from "react-router-dom";
 
 class LoginPage extends Component {
@@ -20,52 +19,47 @@ class LoginPage extends Component {
 	constructor(props) {
 		super(props);
 
-		// sign IN is considered , since you already have an account
+		// sign IN is considered OLD, since you already have an account
 		// sign UP is considered NEW, since you must create an account
 		this.state = {
-			username: "",
-			password: "",
-
+			usernameOLD: "",
+			passwordOLD: "",
+			successfulLogin: false
 		};
 
-		this.submitHandler = this.submitHandler.bind(this);
-
 	}
 
-	setUsername = event => {
-		this.setState({username: event.target.value});
+	setUsernameOLD = event => {
+		this.setState({usernameOLD: event.target.value});
 	};
 
-	setPassword = event => {
-		this.setState({password: event.target.value});
+	setPasswordOLD = event => {
+		this.setState({passwordOLD: event.target.value});
 	};
 
-	checkCompletion = () => {
-		return this.state.username.length > 0 && this.state.password.length > 0;
+	checkCompletionOLD = () => {
+		return this.state.usernameOLD.length > 0 && this.state.passwordOLD.length > 0;
 	};
 
-	// submitHandler = e => {
-	// 	e.preventDefault();
-	// 	axios({url: '/login', method: 'post', data: this.state}).
-	// 	then((response) => {console.log("successful post: ", response)})
-	// 	.catch(err => {console.log("error: ", err)});
-	// }
-
-	submitHandler(e){
+	submitLogin = e => {
 		e.preventDefault();
-		console.log('submitting');
-
-		axios.post('/login',
-			{ username:this.state.username,
-			password:this.state.password })
-		.then((response)=> {
-			console.log(response);
-		}, (error) => {
-			console.log(error)
-		});
+		
+		axios.post('/login', this.state).
+			then((res) => {
+				this.setState({ successfulLogin: true });
+				console.log('success postss: ', res.data);
+				
+			}).catch((error) => console.log(error));
+		
 	}
+	
 
 	render() {
+
+		if (this.state.successfulLogin){
+			return <Redirect to='/'/>;
+		}
+
 		return (
 			<div className="App">
 				<Title/>
@@ -75,12 +69,12 @@ class LoginPage extends Component {
 						<Form>
 							<Form.Label>Sign In</Form.Label>
 							<Form.Group controlId="signInID">
-								<Form.Control type="text" placeholder="ID" onChange={this.setUsername}/>
+								<Form.Control type="text" placeholder="ID" onChange={this.setUsernameOLD}/>
 							</Form.Group>
 							<Form.Group controlId="signInPW">
-								<Form.Control type="text" placeholder="Password" onChange={this.setPassword}/>
+								<Form.Control type="text" placeholder="Password" onChange={this.setPasswordOLD}/>
 							</Form.Group>
-							<Button variant="primary" type="submit" disabled={!this.checkCompletion()} onClick={this.submitHandler}>Submit</Button>
+							<Button variant="primary" type="submit" disabled={!this.checkCompletionOLD()} onClick={this.submitLogin}>Submit</Button>
 			  			</Form>
 		  			</div>
 				</div>

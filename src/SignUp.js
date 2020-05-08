@@ -1,3 +1,4 @@
+  
 import React, { Component } from "react";
 import './Login.css';
 import axios from 'axios';
@@ -10,7 +11,8 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	NavLink
+	NavLink,
+	Redirect
   } from "react-router-dom";
 
 class SignUpPage extends Component {
@@ -19,76 +21,44 @@ class SignUpPage extends Component {
 		super(props);
 
 		// sign IN is considered OLD, since you already have an account
-		// sign UP is considered , since you must create an account
+		// sign UP is considered NEW, since you must create an account
 		this.state = {
-			username: "",
-			password: "",
+			usernameNEW: "",
+			passwordNEW: "",
+			successfulLogin: false
 
 		};
 
-		this.submitHandler = this.submitHandler.bind(this)
-
 	}
 
-	setUsername = event => { 
-		this.setState({username: event.target.value});
+	setUsernameNEW = event => {
+		this.setState({usernameNEW: event.target.value});
 	};
 
-	setPassword = event => {
-		this.setState({password: event.target.value});
+	setPasswordNEW = event => {
+		this.setState({passwordNEW: event.target.value});
 	};
 
-	checkCompletion = () => {
-		return this.state.username.length > 0 && this.state.password.length > 0;
+	checkCompletionNEW = () => {
+		return this.state.usernameNEW.length > 0 && this.state.passwordNEW.length > 0;
 	};
 
-	submitHandler(e) {
-		// const {username, password} = this.state;
-
-		axios
-		.post(
-			"/signUp",
-			{ username: this.state.username,
-			password: this.state.password },
-			{ withCredentials: true}
-			)
-		.then(response => {
-			console.log(response);
-		})
-		.catch(error => {
-			console.log(error.response);
-		});
-		e.preventDefault(); 
-	}
-
-	// submitHandler = e => {
-	// 	e.preventDefault();
-	// 	axios.post('https://localhost:3000/login', this.state).
-	// 	then(response => {console.log("successful post: ", response)})
-	// 	.catch(err => {console.log("error: ", err)});
-	// 	const response = fetch('api/', {
-	// 		method: 'POST',
-	// 		body: JSON.stringify(this.state)
-	// 	});
-
-
-		// const router = Router();
-		// const instance = axios.create({
-		// 	httpsAgent: new https.Agent({  
-		// 	  rejectUnauthorized: false
-		// 	})
-		//   });
-		// router.post('https://localhost:3000/login', this.state)
-		// then((response) => {console.log("successful post: ", response)})
-		// .catch( (err) => {console.log("error: ", err)});
-		  
-		// let xhr = new XMLHttpRequest();
-		// xhr.open('POST', 'https://localhost:3000/login');
-		// xhr.send(JSON.stringify({ example: 'data' }))
+	submitHandler = e => {
+		e.preventDefault();
+		axios.post('/signUp', this.state).then(response => {
+			this.setState({ successfulLogin: true });
+			console.log("successful signup post: ", response.data)
+		}).catch(err => {console.log("error: ", err)});
 		
-	
+		
+	}
 
 	render() {
+
+		if (this.state.successfulLogin){
+			return <Redirect to='/login'/>;
+		}
+
 		return (
 			<div className="App">
 				<Title/>
@@ -99,12 +69,12 @@ class SignUpPage extends Component {
 			  			<Form>
 			  				<Form.Label>Sign Up</Form.Label>
 			  				<Form.Group controlId="signUpID">
-								<Form.Control type="text" placeholder="ID" onChange={this.setUsername}/>
+								<Form.Control type="text" placeholder="ID" onChange={this.setUsernameNEW}/>
 							</Form.Group>
 							<Form.Group controlId="signUpPW">
-								<Form.Control type="text" placeholder="Password" onChange={this.setPassword}/>
+								<Form.Control type="text" placeholder="Password" onChange={this.setPasswordNEW}/>
 							</Form.Group>
-							<Button variant="primary" type="submit" disabled={!this.checkCompletion()} onClick={this.submitHandler}>Submit</Button>
+							<Button variant="primary" type="submit" disabled={!this.checkCompletionNEW()} onClick={this.submitHandler}>Submit</Button>
 						</Form>
 					</div>
 				</div>
