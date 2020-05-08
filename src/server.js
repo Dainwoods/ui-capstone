@@ -62,12 +62,13 @@ app.post('/favorite', (req, res) => {
   if (req.session.user === undefined) {
     res.send({success: 'no-user'});
   } else{
-  querries.addFavorite(req.session.user, req.body.movie).then((result) => {
+  querries.addFavorite(req.session.user, req.body.movie, req.body.addingMovie).then((result) => {
     if (result.affectedRows > 0){
       res.send({success: true});
     }
   }
   )}
 })
+
 
 app.get('/status', (req, res) => res.send('Working!'));

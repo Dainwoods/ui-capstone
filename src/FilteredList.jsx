@@ -47,27 +47,42 @@ class FilteredList extends Component {
 	};
 
 	matchesFilterType = item => {
-		if(this.state.favorites) {
+		if(this.state.favorites) {			
 			return item.favorite === './images/staryellow.jpg' && (this.state.genre === "All Genres" || item.genre === this.state.genre) && (this.state.director === "All Directors" || item.director === this.state.director);
 		}
 		return (this.state.genre === "All Genres" || item.genre === this.state.genre) && (this.state.director === "All Directors" || item.director === this.state.director);
 	}
+
+
+
 
 	filterAndSearch = item => {
 		return item.name.toLowerCase().search(this.state.search) !== -1 && this.matchesFilterType(item);
 	}
 
 	favorited = (movie) => {
+		// if movie was not favorited, then change it to FAVORITED
 		if(movie.favorite === './images/stargrey.png') {
 			movie.favorite = './images/staryellow.jpg';
+
+			axios.post ('/favorite', {movie: movie.index, addingMovie: true}).then((res) => {
+			console.log('success favorite postss: ', res.data);
+			}).catch((error) => console.log(error));
 		}
+
+		// if movie was already favorited, UNFAVORITE it
 		else {
 			movie.favorite = './images/stargrey.png';
+
+			axios.post ('/favorite', {movie: movie.index, addingMovie: false}).then((res) => {
+			console.log('success unfavoriting: ', res.data);
+			}).catch((error) => console.log(error));
+
 		}
+
 		this.setState({genre: this.state.genre});
-		axios.post ('/favorite', {movie: movie.index}).then((res) => {
-			console.log('success favorite postss: ', res.data);
-		}).catch((error) => console.log(error));
+
+
 	}
 
 	sendData = (pageNumber) => {

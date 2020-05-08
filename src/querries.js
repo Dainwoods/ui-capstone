@@ -15,8 +15,10 @@ const getUser = (req) => {
       )
     )
 };
-const addFavorite = (user, movie) => {
-    return new Promise ((resolve) => { connection.query(
+const addFavorite = (user, movie, addingMovie) => {
+
+    if (addingMovie) {
+          return new Promise ((resolve) => { connection.query(
         "INSERT INTO UserFavorites (Username, MovieId) VALUES (?, ?);", [user, movie], 
         function (err, rows) {
             if (err) throw err;
@@ -25,8 +27,25 @@ const addFavorite = (user, movie) => {
             //res.send({rows: rows});
         })
     });
+
+    } else {
+
+    return new Promise ((resolve) => { connection.query(
+        "DELETE FROM UserFavorites WHERE Username = ? AND MovieId = ?;", [user, movie], 
+        function (err, rows) {
+            if (err) throw err;
+            console.log('unfavorited: ', rows);
+            resolve(rows);
+            //res.send({rows: rows});
+        })
+    });
+
+    }
+
     
-}    
+} 
+
+   
   
   const addUser = (req, res) => {
     const salt = crypto.randomBytes(32 / 2).toString('hex');
