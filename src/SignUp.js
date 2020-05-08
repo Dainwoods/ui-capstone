@@ -12,7 +12,8 @@ import {
 	Switch,
 	Route,
 	NavLink,
-	Redirect
+	Redirect,
+	withRouter
   } from "react-router-dom";
 
 class SignUpPage extends Component {
@@ -25,7 +26,6 @@ class SignUpPage extends Component {
 		this.state = {
 			usernameNEW: "",
 			passwordNEW: "",
-			successfulLogin: false
 
 		};
 
@@ -49,7 +49,7 @@ class SignUpPage extends Component {
 		axios.post('/signUp', this.state).then(res => {
 			console.log("successful signup post: ", res.data);
 			if (res.data.success) {
-				this.props.history.push( '/');
+				this.props.history.push( '/login');
 			} else {
 				//error handling
 			}
@@ -59,10 +59,6 @@ class SignUpPage extends Component {
 	}
 
 	render() {
-
-		if (this.state.successfulLogin){
-			return <Redirect to='/login'/>;
-		}
 
 		return (
 			<div className="App">
@@ -104,4 +100,4 @@ class SignUpPage extends Component {
   }
 }
 
-export default SignUpPage;
+export default withRouter(SignUpPage);

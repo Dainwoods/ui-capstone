@@ -60,9 +60,12 @@ app.post('/signup', (req, res) =>  {
 
 
 app.post('/ifSession', (req, res) => {
-  if (req.session.user === undefined) {
+  // no user
+  if (req.session === undefined) {
     res.send({session: false});
+  // active user exists
   } else {
+    console.log(req.session.user);
     res.send({success: true});
   }
 });

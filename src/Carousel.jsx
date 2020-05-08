@@ -7,6 +7,11 @@ import {
 	Route,
 	NavLink,
   } from "react-router-dom";
+import Title from "./Title";
+import axios from 'axios';
+import LoginButton from "./LoginButton"
+import LogoutButton from "./LogoutButton"
+var loginButton;
 
 class Carousel extends Component {
 	constructor(props) {
@@ -58,22 +63,34 @@ class Carousel extends Component {
 
 	}
 
+	// loggedIn = () => {
+	// 	axios.get('/ifSession', this.state).
+	// 		then((res) => {
+	// 			// if there's a current session, then SHOW LOGOUT
+	// 			if (res.data.session) {
+	// 				// then show logout
+	// 				return true
+	// 			// if there's no session, don't show option of logging out
+	// 			} else {
+	// 				return false
+	// 			}
+
+	// 		}).catch((error) => console.log(error));
+	// }
+
 	render() {
-		//let img = this.props.pics[0];
-		/*return (
-		  <div className="title" onClick={() => this.props.changePageNumber(0)}>
-			<div className="titleText">
-				<h1>日本のえいが</h1>
-				<h2>JAPANESE MOVIES</h2>
-				<h5>CLICK IMAGE TO CHANGE SCENE</h5>
-			</div>
-			<div className="titleImage">
-				<img className="titleImage2" src={ require(`${ this.props.pics[this.state.index].img }`)} onClick={() => this.changeIndex()} />
-			</div>
-		  </div>
-		);*/
+		
+		// if (this.loggedIn){
+		// 		loginButton = <LogoutButton />
+		// 	// there's no session, so prompt to login
+		// 	} else {
+		// 		loginButton = <LoginButton />
+		// 	}
+
 
 		return (
+
+
 
 
 			<div className="title-container-mainpage">
@@ -87,6 +104,7 @@ class Carousel extends Component {
 
 				</div>
 
+				
 				<div class="menu-container">
 
 					<h1><NavLink to={"/about"}
@@ -100,6 +118,8 @@ class Carousel extends Component {
     					textDecoration: "none"
 					}} class="carousel-about-link">About</NavLink></h1>
 
+					{/*{loginButton}*/}
+
 					<h1><NavLink to={"/login"}
 						style={{
 							textDecoration: "none",
@@ -108,9 +128,12 @@ class Carousel extends Component {
     					fontWeight: "bold",
     					color: "white",
     					textDecoration: "none"
-					}} class="carousel-login-link">Login</NavLink></h1>
+					}} class="carousel-login-link">Login/Logout</NavLink></h1>
 
 				</div>
+
+
+
 
 			</div>
 
