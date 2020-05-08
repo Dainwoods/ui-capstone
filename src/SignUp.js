@@ -1,3 +1,4 @@
+  
 import React, { Component } from "react";
 import './Login.css';
 import axios from 'axios';
@@ -10,7 +11,8 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	NavLink
+	NavLink,
+	Redirect
   } from "react-router-dom";
 
 class SignUpPage extends Component {
@@ -23,6 +25,7 @@ class SignUpPage extends Component {
 		this.state = {
 			usernameNEW: "",
 			passwordNEW: "",
+			successfulLogin: false
 
 		};
 
@@ -56,6 +59,11 @@ class SignUpPage extends Component {
 	}
 
 	render() {
+
+		if (this.state.successfulLogin){
+			return <Redirect to='/login'/>;
+		}
+
 		return (
 			<div className="App">
 				<Title/>

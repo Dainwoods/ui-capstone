@@ -6,14 +6,13 @@ import https from 'https';
 import Title from "./Title";
 import Divider from "./Divider";
 import {withRouter} from 'react-router-dom'
-//import getLogin from './server.js'
-//import sendDataPost from "./db-integration"
-// import { Router } from 'express';
+
 import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	NavLink
+	NavLink,
+	Redirect
   } from "react-router-dom";
 
 class LoginPage extends Component {
@@ -62,6 +61,11 @@ class LoginPage extends Component {
 	
 
 	render() {
+
+		if (this.state.successfulLogin){
+			return <Redirect to='/'/>;
+		}
+
 		return (
 			<div className="App">
 				<Title/>
