@@ -77,7 +77,7 @@ class SignUpPage extends Component {
 								<Form.Control type="text" placeholder="ID" onChange={this.setUsernameNEW}/>
 							</Form.Group>
 							<Form.Group controlId="signUpPW">
-								<Form.Control type="text" placeholder="Password" onChange={this.setPasswordNEW}/>
+								<Form.Control type="password" placeholder="Password" onChange={this.setPasswordNEW}/>
 							</Form.Group>
 							<Button variant="primary" type="submit" disabled={!this.checkCompletionNEW()} onClick={this.submitHandler}>Submit</Button>
 						</Form>

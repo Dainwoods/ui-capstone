@@ -78,7 +78,7 @@ class LoginPage extends Component {
 								<Form.Control type="text" placeholder="ID" onChange={this.setUsername}/>
 							</Form.Group>
 							<Form.Group controlId="signInPW">
-								<Form.Control type="text" placeholder="Password" onChange={this.setPassword}/>
+								<Form.Control type="password" placeholder="Password" onChange={this.setPassword}/>
 							</Form.Group>
 							<Button variant="primary" type="submit" disabled={!this.checkCompletion()} onClick={this.submitLogin}>Submit</Button>
 			  			</Form>
