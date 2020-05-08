@@ -67,6 +67,16 @@ app.post('/ifSession', (req, res) => {
   }
 });
 
+app.post('/logout', (req, res) => {
+  if (req.session.user === undefined) {
+  } else {
+    req.session.destroy();
+    res.clearCookie('session');
+    res.redirect('/');
+    console.log('session KILLED:  ', req.session);
+  }
+});
+
 
 app.post('/favorite', (req, res) => {  
   if (req.session.user === undefined) {
