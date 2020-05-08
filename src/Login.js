@@ -5,6 +5,7 @@ import { Form, Button } from 'react-bootstrap'
 import https from 'https';
 import Title from "./Title";
 import Divider from "./Divider";
+import {withRouter} from 'react-router-dom'
 //import getLogin from './server.js'
 //import sendDataPost from "./db-integration"
 // import { Router } from 'express';
@@ -23,31 +24,38 @@ class LoginPage extends Component {
 		// sign IN is considered OLD, since you already have an account
 		// sign UP is considered NEW, since you must create an account
 		this.state = {
-			usernameOLD: "",
-			passwordOLD: "",
+			username: "",
+			password: "",
+			isLoggedIn: false,
 
 		};
-
+		this.props = props;
 	}
 
-	setUsernameOLD = event => {
-		this.setState({usernameOLD: event.target.value});
+	setUsername = event => {
+		this.setState({username: event.target.value});
 	};
 
-	setPasswordOLD = event => {
-		this.setState({passwordOLD: event.target.value});
+	setPassword = event => {
+		this.setState({password: event.target.value});
 	};
 
-	checkCompletionOLD = () => {
-		return this.state.usernameOLD.length > 0 && this.state.passwordOLD.length > 0;
+	checkCompletion = () => {
+		return this.state.username.length > 0 && this.state.password.length > 0;
 	};
 
 	submitLogin = e => {
 		e.preventDefault();
-		
 		axios.post('/login', this.state).
 			then((res) => {
-				console.log('success postss: ', res.data)	
+				console.log('success postss: ', res.data);
+				if (res.data.success) {
+					console.log('we trying  ', this.props);
+					this.props.history.push( '/');
+				} else {
+					//error handling
+				}
+
 			}).catch((error) => console.log(error));
 		
 	}
@@ -63,12 +71,12 @@ class LoginPage extends Component {
 						<Form>
 							<Form.Label>Sign In</Form.Label>
 							<Form.Group controlId="signInID">
-								<Form.Control type="text" placeholder="ID" onChange={this.setUsernameOLD}/>
+								<Form.Control type="text" placeholder="ID" onChange={this.setUsername}/>
 							</Form.Group>
 							<Form.Group controlId="signInPW">
-								<Form.Control type="text" placeholder="Password" onChange={this.setPasswordOLD}/>
+								<Form.Control type="text" placeholder="Password" onChange={this.setPassword}/>
 							</Form.Group>
-							<Button variant="primary" type="submit" disabled={!this.checkCompletionOLD()} onClick={this.submitLogin}>Submit</Button>
+							<Button variant="primary" type="submit" disabled={!this.checkCompletion()} onClick={this.submitLogin}>Submit</Button>
 			  			</Form>
 		  			</div>
 				</div>
@@ -93,4 +101,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);

@@ -17,7 +17,7 @@ class SignUpPage extends Component {
 
 	constructor(props) {
 		super(props);
-
+		props = this.props;
 		// sign IN is considered OLD, since you already have an account
 		// sign UP is considered NEW, since you must create an account
 		this.state = {
@@ -42,8 +42,14 @@ class SignUpPage extends Component {
 
 	submitHandler = e => {
 		e.preventDefault();
-		axios.post('/signUp', this.state).then(response => {
-			console.log("successful signup post: ", response.data)
+		//add a user validation - msut have unique user values
+		axios.post('/signUp', this.state).then(res => {
+			console.log("successful signup post: ", res.data);
+			if (res.data.success) {
+				this.props.history.push( '/');
+			} else {
+				//error handling
+			}
 		}).catch(err => {console.log("error: ", err)});
 		
 		

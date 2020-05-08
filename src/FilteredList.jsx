@@ -4,6 +4,7 @@ import List from "./List";
 import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
 import InstagramEmbed from 'react-instagram-embed';
 import { Link } from 'react-router-dom'
+import axios from "axios";
 
 class FilteredList extends Component {
 	constructor(props) {
@@ -64,6 +65,9 @@ class FilteredList extends Component {
 			movie.favorite = './images/stargrey.png';
 		}
 		this.setState({genre: this.state.genre});
+		axios.post ('/favorite', {movie: movie.index}).then((res) => {
+			console.log('success favorite postss: ', res.data);
+		}).catch((error) => console.log(error));
 	}
 
 	sendData = (pageNumber) => {

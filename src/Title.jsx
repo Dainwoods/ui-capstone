@@ -15,6 +15,7 @@ class Title extends Component {
 	}
 
 	render() {
+		let user = this.props.user; 
 		return (
 		  <div className="title-container">
 				<div className="titleBarText"> 
@@ -43,7 +44,6 @@ class Title extends Component {
 	    					textDecoration: "none"
 						}}
 						class="title-about-link">About</NavLink></h1>
-
 					<h1><NavLink to={"/login"}
 						style={{
 							textDecoration: "none",
@@ -53,7 +53,7 @@ class Title extends Component {
 	    					color: "black",
 	    					textDecoration: "none"
 						}}
-						class="title-about-link">Login</NavLink></h1>
+						class="title-about-link">{this.props.hasUser ? this.props.user : Login}</NavLink></h1>
 
 					{/*<h1><NavLink to={"/about"}>About</NavLink></h1>
 										<h1><NavLink className="nav-link" to={"/login"}>Login</NavLink></h1>*/}

@@ -15,6 +15,7 @@ import Navigation from "./Navigation"
 import LoginPage from "./Login"
 import SignUpPage from "./SignUp"
 import MainPage from "./MainPage"
+import history from './history.js'
 
 class App extends Component {
 
@@ -35,6 +36,8 @@ class App extends Component {
 		  speedUp: .0005,
 		  page: 0,
 		  currentMovie: 0,
+		  hasUser: false,
+		  user: "",
 		  movieList: [
 				{ name: "The Wind Rises", index: 0, genre: "Drama", director: "Hayao Miyazaki", year: 2013, pic: './images/wind-rises.jpg', favorite: './images/stargrey.png', storePage: 'https://ghiblicollection.com/product/the-wind-rises?product_id=6717',
 				description: "Jiro dreams of flying and designing beautiful airplanes, inspired by the famous Italian aeronautical designer Caproni. Nearsighted and unable to be a pilot, he becomes one of the world’s most accomplished airplane designers, experiencing key historical events in an epic tale of love, perseverance, and the challenges of living and making choices in a turbulent world."},
@@ -101,21 +104,24 @@ class App extends Component {
 		this.setState({page: pageNumber});
 	};
 
+	//doesn't work with reloads - use a get request for sessions instead
+	setUser = (username) => {
+		this.setState({hasUser: true, user: username})
+	}
 
 	render() {
-		
 
 		return (
-			<Router>
+			<Router history={history}>
 				<Switch>
 					<Route exact path= '/about' render= { () => <AboutPage about/>}/>
 					<Route exact path='/' render= { () => <MainPage pics={this.state.pics} 
-					movieList={this.state.movieList} totoro={this.state.totoro} speedUp={this.state.speedUp } loadMoviePage={this.loadMoviePage}/>}/>
+					movieList={this.state.movieList} totoro={this.state.totoro} speedUp={this.state.speedUp } loadMoviePage={this.loadMoviePage} user={this.state.user} hasUser={this.state.user}/>}/>
 						
 					
 					<Route exact path='/moviePage' render= { () => <MoviePage movie={this.state.movieList[this.state.currentMovie]}/>}/>
-					<Route exact path='/login' render={ () => <LoginPage login/>}></Route>
-					<Route exact path='/signup' render={ () => <SignUpPage signup/>}></Route>
+					<Route exact path='/login' render={ () => <LoginPage history={history} login/>}></Route>
+					<Route exact path='/signup' render={ () => <SignUpPage signup history={history}/>}></Route>
 				</Switch>
 			</Router>
 

@@ -4,10 +4,19 @@ const express = require('express');
 const router = express.Router();
 const app = express();
 const bodyParser = require('body-parser');
-const connection = require('./db');
-const mysql = require('mysql');
-const crypto = require ('crypto');
+const session = require('client-sessions');;
+const redis = require('redis');
+//const redisStore = require('connect-redis')(session);
+//const client  = redis.createClient();
+const querries = require('./querries.js');
 
+
+app.use(session({
+  cookieName: 'session',
+  secret: 'secret_string',
+  //session duration in ms
+  duration: 120 * 60 * 1000,
+}));
 
 app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), function() {
@@ -21,53 +30,44 @@ app.use(bodyParser.urlencoded({
 
 app.use('/', express.static('../build'))
 
-app.get('http://localhost:3000/', (req, res) => {
-  console.log('home: ', req.params)
-  connection.query(`CREATE TABLE IF NOT EXISTS Users ( UserId serial PRIMARY KEY,
-        Username varchar(60) UNIQUE NOT NULL,
-        Salt varchar(32) NOT NULL,
-        Password varchar(64) NOT NULL
-      );`);
-
-  connection.query(`CREATE TABLE IF NOT EXISTS UserFavorites (
-        Username varchar(60) REFERENCES Users(Username),
-        MovieId int NOT NULL
-      );`);
-    });
-const getUser = (req, res) => {
-  password = crypto.createHash('sha256').update(req.body.passwordOLD).digest('hex')
-  return connection.query(
-      "SELECT * FROM Users WHERE Username = ? AND Password = ? ;", [req.body.usernameOLD, password],
-      function(error, rows) {
-        if (error) throw error;
-        console.log('rows found:  '  , rows);
-        res.send({rows: rows, tst: "betterTest"});
-      }
-    )
-  }
-
-const addUser = (req, res) => {
-  const salt = crypto.randomBytes(32 / 2).toString('hex');
-  const hashedPassword = crypto.createHash('sha256').update(req.body.passwordNEW).digest('hex');
-  console.log('hasehd:  ', hashedPassword);
-  return connection.query (
-  "INSERT INTO Users(Username, Salt, Password) VALUES(?, ?, ?);", [req.body.usernameNEW, salt, hashedPassword],
-  function(err, rows) {
-    if (err) throw err;
-    console.log('rowss inserted: ', rows);
-    res.send({rows: rows, signUpTest: 'test'});
-  }
-)}
-
-app.post('/login', (req, res, next) => {
-  console.log('back end post data: ', req.body);
-  getUser(req, res);
+app.post('/', (req, res) => {
+  console.log('home called');
+  res.send({session: req.session.user});
+  
 });
 
-app.post('/signup', (req, res, next) =>  {
-  console.log('sign up backend post data: ', req.body);
-  addUser(req, res);
+app.post('/login', (req, res) => {
+  console.log('sesssion:  ', req.session);
+  querries.getUser(req).then( (rows) =>{
+    if (rows.length > 0) {
+      req.session.user = rows[0].Username;
+      console.log('session:  ', req.session);
+      res.send({success: true, result: rows});
+    } else {
+      res.send({success: false, result: 'No user found'})
+    }
+  });
+  
 });
 
+app.post('/signup', (req, res) =>  {
+  querries.addUser(req, res).then((result) => {
+    if (result.affectedRows > 0){
+      res.send({success: true});
+    }
+  });
+});
+
+app.post('/favorite', (req, res) => {  
+  if (req.session.user === undefined) {
+    res.send({success: 'no-user'});
+  } else{
+  querries.addFavorite(req.session.user, req.body.movie).then((result) => {
+    if (result.affectedRows > 0){
+      res.send({success: true});
+    }
+  }
+  )}
+})
 
 app.get('/status', (req, res) => res.send('Working!'));
