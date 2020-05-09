@@ -15,14 +15,24 @@ var loginButton;
 class Title extends Component {
 	constructor(props) {
 		super(props);
+		this.loggedIn = this.loggedIn.bind(this);
+		this.state = {
+			login: false,
+		}
 	}
 
 	loggedIn = () => {
-		axios.get('/ifSession', this.state).
+		let ret = false
+		return axios.post('/ifSession', this.state).
 			then((res) => {
 				// if there's a current session, then SHOW LOGOUT
+				console.log('posted in title', res.data);
+				ret = res.data.session;
 				if (res.data.session) {
 					// then show logout
+					console.log('check this session out in title: ', res.data);
+					
+					this.setState({login: res.data.session});
 					return true
 				// if there's no session, don't show option of logging out
 				} else {
@@ -30,16 +40,14 @@ class Title extends Component {
 				}
 
 			}).catch((error) => console.log(error));
+		console.log('returning: ', ret);
+		//return ret;
 	}
-
+	componentDidMount(){
+		this.loggedIn();
+	  }
 	render() {
-		let user = this.props.user; 
-
-		if (this.loggedIn){
-			loginButton = <LogoutButton />
-		} else {
-			loginButton = <LoginButton />
-		}
+		
 
 		return (
 		  <div className="title-container">
@@ -70,7 +78,7 @@ class Title extends Component {
 						}}
 						class="title-about-link">About</NavLink></h1>
 					
-					{loginButton}
+					{this.state.login ? <LogoutButton /> : <LoginButton />}
 
 
 					{/* this.props.hasUser ? this.props.user : Login */}

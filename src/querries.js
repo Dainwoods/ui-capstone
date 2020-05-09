@@ -15,6 +15,17 @@ const getUser = (req) => {
       )
     )
 };
+
+const getFavorites = (user) => {
+  return new Promise ((resolve) => connection.query (
+    "SELECT MovieId FROM UserFavorites WHERE Username = ?;", [user],
+    function (err, rows) {
+      if (err) throw err;
+      console.log('movies db found : ', rows);
+      resolve(rows);
+    }
+  ))
+}
 const addFavorite = (user, movie, addingMovie) => {
 
     if (addingMovie) {
@@ -80,5 +91,6 @@ const addFavorite = (user, movie, addingMovie) => {
       dbSetUp,
       addUser,
       getUser,
-      addFavorite
+      addFavorite,
+      getFavorites
   };    

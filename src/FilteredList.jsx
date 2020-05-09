@@ -21,6 +21,7 @@ class FilteredList extends Component {
 
 		};
 
+		this.getFavorites = this.getFavorites.bind(this);
 	}
 
 	onSelectFilterTypeGenre = event => {
@@ -44,6 +45,10 @@ class FilteredList extends Component {
 
 	toggleFavorites = () => {
 		this.setState({favorites: !this.state.favorites});
+		for (let i = 0; i < this.props.movieList.length; i++) {
+			console.log(this.props.movieList[i].favorite);
+			console.log(this.props.movieList[i]);
+		};
 	};
 
 	matchesFilterType = item => {
@@ -64,7 +69,6 @@ class FilteredList extends Component {
 		// if movie was not favorited, then change it to FAVORITED
 		if(movie.favorite === './images/stargrey.png') {
 			movie.favorite = './images/staryellow.jpg';
-
 			axios.post ('/favorite', {movie: movie.index, addingMovie: true}).then((res) => {
 			console.log('success favorite postss: ', res.data);
 			}).catch((error) => console.log(error));
@@ -73,7 +77,6 @@ class FilteredList extends Component {
 		// if movie was already favorited, UNFAVORITE it
 		else {
 			movie.favorite = './images/stargrey.png';
-
 			axios.post ('/favorite', {movie: movie.index, addingMovie: false}).then((res) => {
 			console.log('success unfavoriting: ', res.data);
 			}).catch((error) => console.log(error));
@@ -83,6 +86,31 @@ class FilteredList extends Component {
 		this.setState({genre: this.state.genre});
 
 
+	}
+	setFavMovie (idx) {
+		for (let i = 0; i < this.props.movieList.length; i++){
+			if (this.props.movieList[i].index === idx) {
+				this.props.movieList[i].favorite = './images/staryellow.jpg';
+			}
+		}
+	}
+
+	getFavorites = () => {
+		axios.post('/favorites').then((res) => {
+			if (res.data.activeSession){
+				let movieFavs = res.data.movies;
+				console.log('movie favs; ', movieFavs);
+				for (let i = 0; i < movieFavs.length; i ++) {
+					this.setFavMovie(movieFavs[0].MovieId);
+					//console.log(this.getMovie(movieFavs[0].MovieId));
+				}
+			}
+			
+		});
+		this.setState({genre: this.state.genre});
+	}
+	componentDidMount() {
+		this.getFavorites();
 	}
 
 	sendData = (pageNumber) => {

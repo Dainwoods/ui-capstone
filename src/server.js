@@ -49,7 +49,19 @@ app.post('/login', (req, res) => {
   });
   
 });
-
+app.post('/favorites', (req, res) => {
+  if(req.session.user === undefined){
+    res.send({activeSession: false, movies: []});
+  } else {
+    querries.getFavorites(req.session.user).then((rows) => {
+     if (rows.length > 0) {
+       res.send({activeSession: true, movies: rows});
+     } else {
+       res.send({activeSession: true, movies: []});
+     }
+    });
+  }
+})
 app.post('/signup', (req, res) =>  {
   querries.addUser(req, res).then((result) => {
     if (result.affectedRows > 0){
@@ -61,12 +73,14 @@ app.post('/signup', (req, res) =>  {
 
 app.post('/ifSession', (req, res) => {
   // no user
-  if (req.session === undefined) {
+  console.log('ifSession post session user: ', req.session.user);
+  if (req.session.user === undefined) {
+    //onsole.log('nom user, results sent')
     res.send({session: false});
   // active user exists
   } else {
-    console.log(req.session.user);
-    res.send({success: true});
+    console.log('testing works', req.session.user);
+    res.send({session: true});
   }
 });
 
@@ -92,6 +106,7 @@ app.post('/favorite', (req, res) => {
   }
   )}
 })
+
 
 
 app.get('/status', (req, res) => res.send('Working!'));

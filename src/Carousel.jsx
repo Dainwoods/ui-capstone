@@ -16,9 +16,11 @@ var loginButton;
 class Carousel extends Component {
 	constructor(props) {
 		super(props);
+		this.loggedIn = this.loggedIn.bind(this);
 		this.state = {
 			index: 1,
-			brightness: 100
+			brightness: 100,
+			login: false
 		};
 		this.tickID = setInterval(this.tick, 5 * 1000);
 		this.firstLoop = true;
@@ -63,30 +65,29 @@ class Carousel extends Component {
 
 	}
 
-	// loggedIn = () => {
-	// 	axios.get('/ifSession', this.state).
-	// 		then((res) => {
-	// 			// if there's a current session, then SHOW LOGOUT
-	// 			if (res.data.session) {
-	// 				// then show logout
-	// 				return true
-	// 			// if there's no session, don't show option of logging out
-	// 			} else {
-	// 				return false
-	// 			}
+	loggedIn = () => {
+		let ret = false;
+		return axios.post('/ifSession', this.state).
+			then((res) => {
+				// if there's a current session, then SHOW LOGOUT
+				console.log('still not called');
+				ret = res.data.session;
+				if (res.data.session) {
+					// then show logout
+					this.setState({login: true});
+					return true
+				// if there's no session, don't show option of logging out
+				} else {
+					return false
+				}
 
-	// 		}).catch((error) => console.log(error));
-	// }
+			}).catch((error) => console.log(error));
+	}
+	componentDidMount(){
+		this.loggedIn();
+	  }
 
 	render() {
-		
-		// if (this.loggedIn){
-		// 		loginButton = <LogoutButton />
-		// 	// there's no session, so prompt to login
-		// 	} else {
-		// 		loginButton = <LoginButton />
-		// 	}
-
 
 		return (
 
@@ -128,7 +129,7 @@ class Carousel extends Component {
     					fontWeight: "bold",
     					color: "white",
     					textDecoration: "none"
-					}} class="carousel-login-link">Login/Logout</NavLink></h1>
+					}} class="carousel-login-link">{this.state.login ? <LogoutButton/> : <LoginButton/>}</NavLink></h1>
 
 				</div>
 
