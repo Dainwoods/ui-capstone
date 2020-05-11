@@ -89,10 +89,12 @@ class FilteredList extends Component {
 	}
 	setFavMovie (idx) {
 		for (let i = 0; i < this.props.movieList.length; i++){
+		
 			if (this.props.movieList[i].index === idx) {
 				this.props.movieList[i].favorite = './images/staryellow.jpg';
 			}
 		}
+		this.setState({genre: this.state.genre});
 	}
 
 	getFavorites = () => {
@@ -101,7 +103,7 @@ class FilteredList extends Component {
 				let movieFavs = res.data.movies;
 				console.log('movie favs; ', movieFavs);
 				for (let i = 0; i < movieFavs.length; i ++) {
-					this.setFavMovie(movieFavs[0].MovieId);
+					this.setFavMovie(movieFavs[i].MovieId);
 					//console.log(this.getMovie(movieFavs[0].MovieId));
 				}
 			}
