@@ -100,6 +100,7 @@ class FilteredList extends Component {
 	getFavorites = () => {
 		axios.post('/favorites').then((res) => {
 			if (res.data.activeSession){
+				console.log("active session");
 				let movieFavs = res.data.movies;
 				console.log('movie favs; ', movieFavs);
 				for (let i = 0; i < movieFavs.length; i ++) {
@@ -107,8 +108,16 @@ class FilteredList extends Component {
 					//console.log(this.getMovie(movieFavs[0].MovieId));
 				}
 			}
+			else {
+				for(let i = 0; i < this.props.movieList.length; i++) {
+					this.props.movieList[i].favorite = './images/stargrey.png';
+				}
+				console.log("not active session");
+				this.setState({genre: this.state.genre});
+			}
 			
 		});
+		console.log("reset called");
 		this.setState({genre: this.state.genre});
 	}
 	componentDidMount() {
