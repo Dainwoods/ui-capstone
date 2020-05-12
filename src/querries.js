@@ -55,21 +55,45 @@ const addFavorite = (user, movie, addingMovie) => {
 
     
 } 
-
+const checkUserExists = (username) => {
+  return new Promise((resolve) => connection.query(
+    "SELECT Username FROM Users WHERE Username = ?;", [username],
+    function(error, rows) {
+      if (error) throw error;
+      //console.log('rows found:  '  , rows);
+      resolve(rows);
+      
+    }
+  )
+)
+}
    
   
   const addUser = (req, res) => {
-    const salt = crypto.randomBytes(32 / 2).toString('hex');
-    const hashedPassword = crypto.createHash('sha256').update(req.body.passwordNEW).digest('hex');
-    return new Promise( (resolve) => connection.query (
-    "INSERT INTO Users(Username, Salt, Password) VALUES(?, ?, ?);", [req.body.usernameNEW, salt, hashedPassword],
-    function(err, rows) {
-      if (err) throw err;
-      console.log('rowss inserted: ', rows);
-      resolve(rows);
-      //res.send({rows: rows});
+    let userExists = false
+    checkUserExists(req.body.usernameNEW).then ((rows) => {
+      if (rows.length > 0) {
+        res.send({success: false, userExists: true})
+      }
+    })
+    if (!userExists) {
+      const salt = crypto.randomBytes(32 / 2).toString('hex');
+      const hashedPassword = crypto.createHash('sha256').update(req.body.passwordNEW).digest('hex');
+      return new Promise( (resolve) => connection.query (
+      "INSERT INTO Users(Username, Salt, Password) VALUES(?, ?, ?);", [req.body.usernameNEW, salt, hashedPassword],
+      function(err, rows) {
+        if (err) {
+          //res.send({success: false, userExists: false})
+          resolve({affectedRows: []});
+        } else {
+          console.log('rowss inserted: ', rows);
+          resolve(rows);
+        }
+        
+        //res.send({rows: rows});
+      }
+      ))
     }
-    ))
 }
 
   

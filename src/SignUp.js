@@ -26,7 +26,7 @@ class SignUpPage extends Component {
 		this.state = {
 			usernameNEW: "",
 			passwordNEW: "",
-
+			signUpStatus: "",
 		};
 
 	}
@@ -49,9 +49,13 @@ class SignUpPage extends Component {
 		axios.post('/signUp', this.state).then(res => {
 			console.log("successful signup post: ", res.data);
 			if (res.data.success) {
-				this.props.history.push( '/login');
+				this.props.history.push( '/');
 			} else {
-				//error handling
+				if(res.data.userExists){
+					this.setState({signUpStatus: "User Exists"})
+				} else {
+					this.setState({signUpStatus: "Fail"});
+				}
 			}
 		}).catch(err => {console.log("error: ", err)});
 		
@@ -59,7 +63,17 @@ class SignUpPage extends Component {
 	}
 
 	render() {
-
+		let userExists = this.state.signUpStatus === "User Exists";
+		let signUpError = this.state.signUpStatus !== "";
+		let errorMsg = '';
+		if (signUpError) {
+			if (userExists ) {
+				errorMsg = "That username is already in use. Please try another one."
+				console.log('user exists: ', this.state);
+			} else {
+				errorMsg = "We couldn't  log you in. Please try again."
+			}
+		}
 		return (
 			<div className="App">
 				<Title/>
@@ -79,7 +93,7 @@ class SignUpPage extends Component {
 						</Form>
 					</div>
 				</div>
-
+				<p>{errorMsg}</p>
 				<p> Already a member?
 					<NavLink to={"/login"}
 						style={{

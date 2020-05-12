@@ -25,7 +25,7 @@ class LoginPage extends Component {
 		this.state = {
 			username: "",
 			password: "",
-			isLoggedIn: false,
+			logginStatus: "None",
 
 		};
 		this.props = props;
@@ -49,15 +49,19 @@ class LoginPage extends Component {
 			then((res) => {
 				console.log('success postss: ', res.data);
 				console.log('success posts 2: ', res.data.success);
+				console.log('success 3: ', res);
 				// successful login
 				if (res.data.success) {
 					this.state.isLoggedIn = true;
 					console.log('we trying  ', this.props);
+					this.setState({logingStatus: "Success"})
 					this.props.history.push( '/');
 					
 				// couldn't log in
 				} else {
 					//error handling
+					this.setState({logingStatus: "Failed"})
+
 				}
 
 			}).catch((error) => console.log(error));
@@ -67,9 +71,7 @@ class LoginPage extends Component {
 
 	render() {
 
-		if (this.state.isLoggedIn){
-			
-		}
+		let logingStatus = this.state.logingStatus === "Failed";
 
 		return (
 			<div className="App">
@@ -89,7 +91,9 @@ class LoginPage extends Component {
 			  			</Form>
 		  			</div>
 				</div>
-
+			
+				{logingStatus ? <p> We couldn't find an account with that username and password. Please try again. 
+				</p> : ''}
 				<p> Not a member?
 					<NavLink to={"/signUp"}
 						style={{

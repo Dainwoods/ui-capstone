@@ -65,7 +65,10 @@ app.post('/favorites', (req, res) => {
 app.post('/signup', (req, res) =>  {
   querries.addUser(req, res).then((result) => {
     if (result.affectedRows > 0){
-      res.send({success: true});
+      req.session.user = req.body.usernameNEW;
+      res.send({success: true, userExists: false});
+    } else {
+      res.send({success: false, userExiss: false});
     }
   });
 });
