@@ -48,6 +48,7 @@ class LoginPage extends Component {
 		axios.post('/login', this.state).
 			then((res) => {
 				console.log('success postss: ', res.data);
+				console.log('success posts 2: ', res.data.success);
 				// successful login
 				if (res.data.success) {
 					this.state.isLoggedIn = true;
